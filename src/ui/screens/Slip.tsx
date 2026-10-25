@@ -27,7 +27,7 @@ export default function Slip() {
     } finally { setBusy(false); }
   };
   return (
-    <Page actions={
+    <Page scrollable actions={
       <>
         <Button variant="primary" onClick={() => window.print()}>{t('slip.print')}</Button>
         <Button loading={busy} onClick={share}>{busy ? t('slip.share_wait') : t('slip.share')}</Button>
