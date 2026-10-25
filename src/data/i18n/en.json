@@ -219,5 +219,13 @@
   "confidence.team_design_tier": "Level chosen by the team. No official source.",
   "confidence.user_supplied_summary_unverified": "Summary supplied by the team. Not verified.",
   "review.if_yes": "If yes: {tier}",
-  "review.if_not_sure": "If not sure: {tier}"
+  "review.if_not_sure": "If not sure: {tier}",
+  "slip.contacts": "Care contacts",
+  "slip.share_open": "Share with my ASHA, doctor or family",
+  "slip.consent_title": "Share this summary?",
+  "slip.consent_body": "It shows the signs you told, the result and the time. It has no name or phone number. Share it only with your ASHA, ANM, doctor or family.",
+  "slip.consent_no": "Not now",
+  "slip.share_text": "Share as text",
+  "slip.copied": "Copied. Paste it into a message.",
+  "slip.text_error": "Could not share the text. Use Print this slip instead."
 }

@@ -134,3 +134,5 @@ html, body, #root { height: 100%; }
 .tick .muted { font-weight: 400; }
 .centered { text-align: center; }
 .plain-list { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 8px; }
+/* In a scrolling column, nothing may shrink below its content. Otherwise buttons with a minimum height clip their text on short screens. */
+.page-body > * { flex-shrink: 0; }
