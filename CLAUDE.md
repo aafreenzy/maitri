@@ -1,6 +1,6 @@
 # Maitri: rules for Claude Code
 
-Maitri (मैत्री) is an offline, Hindi-first danger-sign checker for pregnant and postpartum women in India. It is being built for a hackathon. **Deadline: Sunday 25 Oct 2026, 21:00 IST. Any commit after the deadline disqualifies the team.** The pre-commit hook blocks commits after 20:45 IST. Never bypass it (`--no-verify` is forbidden).
+Maitri (मैत्री) is an offline, Hindi-first danger-sign checker for pregnant and postpartum women in India. It is being built for a hackathon. **Deadline: Sunday 25 Oct 2026, 00:00 IST (extended from 21:00, confirmed by the team). Any commit after the deadline disqualifies the team.** The pre-commit hook blocks commits after 23:50 IST. Never bypass it (`--no-verify` is forbidden).
 
 ## Read before working
 
