@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { Drop, Head, Person, Zig as ZigF, limb } from './figures';
 
 const INK = '#111B38', NIL = '#23358A', HALDI = '#F7B500', PAPER = '#FFFFFF';
 const S = { stroke: INK, strokeWidth: 5, strokeLinecap: 'round', strokeLinejoin: 'round' } as const;
@@ -33,26 +34,33 @@ const thermo = (x: number) => (
 );
 
 export const ICONS: Record<string, ReactNode> = {
-  'stage-pregnant': woman(true),
-  'stage-labour': (<>{woman(true)}<path d="M74 40l10-6M76 56h12M74 72l10 6" {...S} fill="none" /></>),
+  'stage-pregnant': <Person belly arms="belly" />,
+  'stage-labour': (
+    <>
+      <Person belly arms="belly" x={-6} headTilt={-8} />
+      <path d="M78 36l9-5M80 52h10M78 68l9 5" {...S} fill="none" />
+      <path d="M22 4q-3 5 0 8q3-3 0-8z" fill={PAPER} {...S} strokeWidth="2.500" />
+    </>
+  ),
   'stage-after-birth': (
     <>
-      {head(34, 18)}
-      <ellipse cx="34" cy="52" rx="13" ry="23" fill={NIL} {...S} />
-      {legs(30, 40, 72, 90)}
-      <rect x="44" y="46" width="34" height="20" rx="10" transform="rotate(-18 61 56)" fill={HALDI} {...S} />
-      <circle cx="76" cy="42" r="8" fill={PAPER} {...S} />
+      <Person arms="hold" x={-6} />
+      <g transform="rotate(-20 62 58)">
+        <rect x="46" y="48" width="36" height="20" rx="10" fill={HALDI} {...S} />
+        <path d="M52 56q6 3 12 0" fill="none" stroke={INK} strokeWidth="2.500" strokeLinecap="round" />
+      </g>
+      <Head cx={78} cy={44} r={7} hair="short" />
+      <path d="M46 64Q54 70 62 62" fill="none" stroke={INK} strokeWidth="4" strokeLinecap="round" />
     </>
   ),
   fits: (
     <>
-      {head(48, 18)}
-      <ellipse cx="48" cy="52" rx="13" ry="22" fill={NIL} {...S} transform="rotate(12 48 52)" />
-      {legs(42, 56, 72, 90)}
-      {zig(14, 24)}{zig(82, 24, -1)}
+      <Person rotate={-14} x={4} arms="down" headTilt={10} />
+      <ZigF x={9} y={22} /><ZigF x={87} y={22} flip={-1} />
+      <path d="M10 58h8M78 58h8" {...S} />
     </>
   ),
-  bleeding: drop(48, 52, 2.2),
+  bleeding: <Drop x={48} y={50} s={2} />,
   'bleeding-cloth': (
     <>
       <rect x="8" y="34" width="52" height="46" rx="6" fill={PAPER} {...S} />
@@ -63,10 +71,10 @@ export const ICONS: Record<string, ReactNode> = {
   ),
   'head-eye': (
     <>
-      <circle cx="42" cy="52" r="32" fill={PAPER} {...S} />
-      <ellipse cx="42" cy="52" rx="18" ry="11" fill={HALDI} {...S} />
-      <circle cx="42" cy="52" r="5" fill={NIL} stroke="none" />
-      <path d="M80 10l-6 12M88 28l-12 4M72 2l-2 8" {...S} fill="none" />
+      <Head cx={42} cy={54} r={30} hair="short" />
+      <ellipse cx="44" cy="58" rx="15" ry="9" fill={PAPER} {...S} />
+      <circle cx="44" cy="58" r="5" fill={NIL} stroke="none" />
+      <path d="M78 12l-7 13M88 30l-13 4M70 4l-1 9" {...S} fill="none" />
     </>
   ),
   swelling: (
@@ -92,10 +100,9 @@ export const ICONS: Record<string, ReactNode> = {
   ),
   'pale-weak': (
     <>
-      <circle cx="58" cy="26" r="10" fill={PAPER} {...S} />
-      <path d="M52 38c-18 4-22 24-16 44M52 38c12 6 14 24 6 44" fill={PAPER} {...S} />
-      <path d="M36 82h26" fill="none" {...S} />
-      <path d="M18 54l-8 14M78 50l8 14" fill="none" {...S} />
+      <Person rotate={9} x={-2} top={PAPER} bottom={PAPER} headTilt={22} />
+      <path d="M72 14q6-6 10 0t-6 8M78 30q4-4 7 0" fill="none" {...S} strokeWidth="3" />
+      <path d="M12 52l8 6M10 66l9-1" fill="none" {...S} strokeWidth="3" />
     </>
   ),
   breathing: (
@@ -195,23 +202,22 @@ export const ICONS: Record<string, ReactNode> = {
       <path d="M82 18l-8 8M88 36H76" {...S} fill="none" />
     </>
   ),
-  'mode-woman': woman(false),
+  'mode-woman': <Person />,
   'mode-asha': (
     <>
-      {head(40, 18)}
-      <ellipse cx="40" cy="50" rx="14" ry="22" fill={NIL} {...S} />
-      {legs(34, 46, 70, 90)}
-      <rect x="58" y="54" width="28" height="22" rx="4" fill={HALDI} {...S} />
-      <path d="M72 59v12M66 65h12" stroke={INK} strokeWidth="4" strokeLinecap="round" />
-      <path d="M64 54v-4a8 8 0 0 1 16 0v4" fill="none" {...S} />
+      <Person x={-8} />
+      <g transform="translate(60 52)">
+        <path d="M6 0v-5a8 8 0 0 1 16 0v5" fill="none" {...S} />
+        <rect x="0" y="0" width="28" height="24" rx="4" fill={HALDI} {...S} />
+        <path d="M14 5v14M7 12h14" stroke={INK} strokeWidth="4" strokeLinecap="round" />
+      </g>
     </>
   ),
   'mode-family': (
     <>
-      {head(30, 20, 8)}
-      <ellipse cx="30" cy="54" rx="12" ry="22" fill={NIL} {...S} />
-      {head(66, 34, 8, HALDI)}
-      <ellipse cx="66" cy="62" rx="11" ry="17" fill={HALDI} {...S} />
+      <Person x={-26} y={4} s={0.8} />
+      <Person x={20} y={4} s={0.8} top={HALDI} bottom={NIL} hair="short" />
+      <Person x={-3} y={32} s={0.52} top={PAPER} bottom={HALDI} hair="short" />
     </>
   ),
   'tier-unknown': <circle cx="48" cy="48" r="30" fill={PAPER} {...S} />,

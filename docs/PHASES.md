@@ -659,3 +659,14 @@ Start only after the `v1-submission` tag exists. Read `docs/implementation.md` s
 | V11 | Reminder channel | D-18 decided | Team decision, provider account if any |
 | V12 | Facility finder | V02 | Verified dataset with a reuse licence |
 | V13 | Accessibility and device QA for all v2 screens | V03 to V12 | Real low-end phone |
+
+### Added 25 Oct 2026 (voice and backend)
+
+| Phase | Title | Status |
+|---|---|---|
+| V14 | Voice check: speak screen, voice answers, stop at first RED (docs section 20.8) | Built, tested with a mocked recogniser only. Needs real-phone testing. |
+| V15 | Supabase project, run `supabase/migrations/0001_init.sql`, turn on phone sign-in and connect a text-message provider | Owner creates the project and supplies the project URL and public anon key |
+| V16 | Sign-in screen (phone and code) and sign-out and delete-account | After V15 |
+| V17 | Daily check-in form for pregnancy and postpartum, on-device first, sync when signed in | After V16 and clinician review of the daily questions |
+| V18 | Daily guidance rules (concern flagged, tell your ASHA this week, go today) | Needs clinician review of every rule |
+| V19 | Server speech-to-text option (only if approved, see D-21) | Open |
