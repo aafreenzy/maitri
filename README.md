@@ -26,11 +26,14 @@ Optional, off until configured: phone sign-in and a daily log (see "Backend").
 ```
 npm install
 npm run dev          # development server
-npm test             # 108 tests, including all 46 rule cases
+npm test             # 180+ tests: all 46 rule cases, safety properties, every decision path, Hindi/English audit
 npm run build        # runs the tests first, then builds and writes the service worker
 npm run preview      # serve the production build
 python3 tests/reference_check.py   # independent Python implementation of the rules, must also pass 46 of 46
+npm run test:differential          # re-checks 12,000+ generated answer sets against a second implementation in Python
+npm run packet       # regenerates docs/CLINICIAN_REVIEW_PACKET.md from the data
 npm run check:contrast
+npm run check:backend              # verifies a Supabase project once one is configured
 npm run audio:plan   # clip list and cost estimate for the voice clips (no network)
 ```
 

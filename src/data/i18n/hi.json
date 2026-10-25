@@ -219,5 +219,13 @@
   "confidence.team_design_tier": "स्तर टीम ने खुद तय किया। कोई आधिकारिक स्रोत नहीं।",
   "confidence.user_supplied_summary_unverified": "टीम का दिया सारांश। जाँचा नहीं गया।",
   "review.if_yes": "अगर हाँ: {tier}",
-  "review.if_not_sure": "अगर पक्का नहीं: {tier}"
+  "review.if_not_sure": "अगर पक्का नहीं: {tier}",
+  "slip.contacts": "देखभाल के संपर्क",
+  "slip.share_open": "अपनी आशा, डॉक्टर या परिवार को भेजिए",
+  "slip.consent_title": "यह सारांश भेजना है?",
+  "slip.consent_body": "इसमें आपके बताए लक्षण, नतीजा और समय है। इसमें कोई नाम या फ़ोन नंबर नहीं है। इसे सिर्फ़ अपनी आशा, ANM, डॉक्टर या परिवार को भेजिए।",
+  "slip.consent_no": "अभी नहीं",
+  "slip.share_text": "संदेश की तरह भेजिए",
+  "slip.copied": "कॉपी हो गया। इसे संदेश में चिपकाइए।",
+  "slip.text_error": "संदेश नहीं भेज पाए। इसकी जगह यह पर्ची छापिए।"
 }
