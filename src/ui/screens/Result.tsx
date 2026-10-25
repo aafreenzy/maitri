@@ -34,7 +34,7 @@ export default function Result() {
   const family = state.mode === 'family' || state.mode === 'asha';
   const title = t(`result.${r.tier}.title${family && r.tier !== 'GREEN' ? '_family' : ''}`);
   const body = r.tier !== 'GREEN' && !num ? '' : t(`result.${r.tier}.body`, { number: num?.number ?? '' });
-  const clip = `result_${r.tier}`;
+  const clip = `result_${r.tier}${family && r.tier !== 'GREEN' ? '_family' : ''}`;
 
   return (
     <div className={`page full wall ${r.tier} ${typeof window !== 'undefined' && window.location.search.includes('grayscale') ? 'grayscale' : ''}`}>

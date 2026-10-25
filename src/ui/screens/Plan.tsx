@@ -28,7 +28,7 @@ export default function Plan() {
             {i === 0 && <CallButton numberKey="ambulance_primary" white={false} />}
             {i === 0 && transport && <CallButton numberKey="transport_pregnant" white={false} text={t('plan.transport_line', { number: transport.number })} />}
             {i === 3 && <p className="muted">{entitlement(lang)}</p>}
-            {i === 0 && <Listen clipId="plan_step1" text={text} />}
+            <Listen clipId={`plan_step${i + 1}`} text={text} />
             <label className="tick">
               <input type="checkbox" checked={!!done[i]} onChange={(e) => setDone({ ...done, [i]: e.target.checked })} />
               {t('plan.done')}
