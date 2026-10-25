@@ -21,7 +21,7 @@ export default function Trust() {
       </section>
       <section className="card">
         <div className="kv"><span>{t('trust.tests')}</span><b>{ok ? t('trust.tests_of', { passed: report!.passed!, total: report!.total! }) : t('trust.not_available')}</b></div>
-        {ok && <div className="meter" role="progressbar" aria-valuemin={0} aria-valuemax={report!.total} aria-valuenow={report!.passed}><i style={{ width: `${(report!.passed! / report!.total!) * 100}%` }} /></div>}
+        {ok && <div className="meter" role="progressbar" aria-label={t('trust.tests')} aria-valuemin={0} aria-valuemax={report!.total} aria-valuenow={report!.passed}><i style={{ width: `${(report!.passed! / report!.total!) * 100}%` }} /></div>}
         <p className="muted small">{t('trust.tests_note')}</p>
       </section>
       <section className="card">

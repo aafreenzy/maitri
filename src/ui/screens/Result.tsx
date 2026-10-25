@@ -64,12 +64,12 @@ export default function Result() {
         <Listen clipId={clip} text={`${title}. ${body}`} />
         <p className="small">{t('result.disclaimer_short')}</p>
       </main>
-      <div className="action-bar">
+      <footer className="action-bar">
         {r.tier !== 'GREEN' && <CallButton numberKey="ambulance_primary" />}
         {r.isRed && <Button className="ghosted" onClick={() => nav('/plan')}><Glyph name="list" size={28} />{t('result.family_plan')}</Button>}
         <Button className="ghosted" onClick={() => nav('/slip')}><Glyph name="doc" size={28} />{t('result.show_slip')}</Button>
         {r.tier === 'GREEN' && <Button className="white" onClick={() => { dispatch({ type: 'reset' }); nav('/stage'); }}>{t('result.check_again')}</Button>}
-      </div>
+      </footer>
     </div>
   );
 }
