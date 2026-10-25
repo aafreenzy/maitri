@@ -6,7 +6,9 @@ export function Sheet({ open, onClose, title, children }: { open: boolean; onClo
     if (!open) return;
     const prev = document.activeElement as HTMLElement | null;
     const focusables = () => ref.current?.querySelectorAll<HTMLElement>('button, a[href], input, [tabindex]:not([tabindex="-1"])') ?? [];
-    focusables()[0]?.focus();
+    // Focus the panel itself, not its first button, so a long panel opens at the top instead of scrolling to the bottom.
+    ref.current?.focus({ preventScroll: true });
+    ref.current?.scrollTo?.(0, 0);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
       if (e.key === 'Tab') {
@@ -23,7 +25,7 @@ export function Sheet({ open, onClose, title, children }: { open: boolean; onClo
   if (!open) return null;
   return (
     <div className="sheet-scrim" onClick={onClose}>
-      <div ref={ref} className="sheet" role="dialog" aria-modal="true" aria-label={title} onClick={(e) => e.stopPropagation()}>
+      <div ref={ref} className="sheet" role="dialog" aria-modal="true" aria-label={title} tabIndex={-1} onClick={(e) => e.stopPropagation()}>
         <h2>{title}</h2>
         {children}
       </div>

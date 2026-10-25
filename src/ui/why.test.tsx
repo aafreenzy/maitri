@@ -23,6 +23,15 @@ describe('Why this result?', () => {
     expect(within(dialog).getAllByText(/Mother and Child Protection/).length).toBeGreaterThan(0);
     expect(within(dialog).getByText(/Not yet reviewed by a clinician/)).toBeInTheDocument();
   });
+  it('after an early RED it shows only the rule for what she answered, not questions she was never asked', async () => {
+    const user = userEvent.setup();
+    mount({ ...initialState, mode: 'woman', stage: 'after_birth', answers: { q_bleed_pp: 'yes' } });
+    await user.click(screen.getByRole('button', { name: 'Why this result?' }));
+    const dialog = screen.getByRole('dialog');
+    expect(within(dialog).getByText('R-PPH-01')).toBeInTheDocument();
+    expect(within(dialog).queryByText(/very bad belly pain/)).toBeNull();
+    expect(within(dialog).queryAllByText(/^R-/)).toHaveLength(1);
+  });
   it('says when you were not sure', async () => {
     const user = userEvent.setup();
     mount({ ...initialState, mode: 'woman', stage: 'pregnant', answers: { q_fits: 'not_sure' } });

@@ -13,6 +13,8 @@ export function WhyResult() {
   const { state } = useSession();
   useLang();
   if (!r) return null;
+  // Questions she was never asked (the check ended early) count as not sure inside the engine. They are not shown here.
+  const shown = r.result.fired.filter((f) => f.question_ids.some((id) => state.answers[id] !== undefined));
   const label = (id: string) => {
     const q = data.questions.find((x) => x.id === id);
     return q ? questionShort(q) : id;
@@ -23,8 +25,8 @@ export function WhyResult() {
       <Sheet open={open} onClose={() => setOpen(false)} title={t('result.why')}>
         <p>{t('result.why_body')}</p>
         <div className="why-list">
-          {r.result.fired.length === 0 && <p className="why-item">{t('result.why_none')}</p>}
-          {r.result.fired.map((f) => {
+          {shown.length === 0 && <p className="why-item">{t('result.why_none')}</p>}
+          {shown.map((f) => {
             const rule = data.rules.find((x) => x.id === f.rule_id);
             const unsure = f.question_ids.some((id) => state.answers[id] === 'not_sure');
             return (
