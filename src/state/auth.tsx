@@ -8,7 +8,7 @@ interface AuthCtx {
   loading: boolean;
   user: AuthUser | null;
   sendCode: (phone: string) => Promise<void>;
-  signInWithGoogle: () => Promise<void>;
+  signInWithGoogle: (next?: string) => Promise<void>;
   verifyCode: (phone: string, code: string) => Promise<void>;
   signOut: () => Promise<void>;
   deleteAccount: () => Promise<void>;
@@ -59,8 +59,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   /** Sends her to Google and back. The check never depends on this. Landing page after sign-in is the log. */
-  const signInWithGoogle = useCallback(async () => {
-    try { sessionStorage.setItem(AFTER_SIGNIN, '/log'); } catch { /* ignore */ }
+     const signInWithGoogle = useCallback(async (next: string = '/log') => {
+     try { sessionStorage.setItem(AFTER_SIGNIN, next); } catch { /* ignore */ }
     const { error } = await (await getClient()).auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin + window.location.pathname } });
     if (error) throw error;
   }, []);
