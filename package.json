@@ -17,7 +17,8 @@
     "audio:plan": "node scripts/generate-audio.mjs",
     "audio:generate": "node scripts/generate-audio.mjs --run",
     "audio:check": "node scripts/generate-audio.mjs --check",
-    "check:backend": "node scripts/check-backend.mjs"
+    "check:backend": "node scripts/check-backend.mjs",
+    "test:differential": "vitest run src/engine/properties.test.ts && python3 tests/differential_check.py"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",

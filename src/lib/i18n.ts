@@ -38,6 +38,13 @@ export function t(key: string, params?: Record<string, string | number>): string
   return s;
 }
 
+/** Readable label for a confidence code from the data files. Falls back to the code. */
+export const confidenceLabel = (id: string): string => {
+  const key = `confidence.${id}`;
+  const v = t(key);
+  return v === key ? id : v;
+};
+
 export const questionText = (q: Question) => (current === 'hi' ? q.hi : q.en);
 export const questionShort = (q: Question) => (current === 'hi' ? q.short_hi : q.short_en);
 export const stageLabel = (s: Stage) => (current === 'hi' ? s.hi : s.en);
