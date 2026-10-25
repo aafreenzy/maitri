@@ -39,16 +39,19 @@ If the network or audio fails: use the tap check (it needs neither) and the reco
 ## 2. The project, point by point
 
 **What it is**
+
 1. Maitri (मैत्री, "friendship") is an offline, Hindi-first danger-sign checker for pregnant women and women in the 42 days after birth.
 2. It is a web app that installs like an app and works with no internet after one visit.
 3. It is an education tool. It does not diagnose and cannot replace a health worker.
 
 **Who it is for**
+
 4. The woman, on her own or a shared phone.
 5. The ASHA or ANM checking one woman after another (optional on-device list, off by default).
 6. The family member who decides whether she goes now.
 
 **What it does**
+
 7. Asks plain-language questions one at a time, each with a picture and a Listen button.
 8. Accepts answers by tapping (tick for Yes, cross for No, question mark for Not sure) or by voice.
 9. Shows one of three results, each with a word, a shape and a colour so it reads in greyscale: RED octagon (go to the hospital now), AMBER triangle (see the ANM, ASHA or doctor today), GREEN circle ("No danger sign told").
@@ -62,6 +65,7 @@ If the network or audio fails: use the tap check (it needs neither) and the reco
 17. "Exit now" clears everything and leaves the app, for shared phones.
 
 **How it decides**
+
 18. A deterministic rule engine reads rules from one file. No AI, no network call and no randomness decide a result.
 19. The highest level among the rules that apply wins. If none apply the result is GREEN, worded "No danger sign told" with a go-if-worse line. The app never says "fine" or "safe".
 20. A skipped or "Not sure" answer on a sign that matters counts as AMBER at least. Over-escalation is accepted because missing a danger sign costs more.
@@ -70,12 +74,14 @@ If the network or audio fails: use the tap check (it needs neither) and the reco
 23. Voice only turns spoken words into the same Yes, No, Not sure answers using fixed word lists. She sees the signs found and can remove them. A spoken "No" is confirmed first, because a misheard "Yes" only over-escalates but a misheard "No" could hide a sign.
 
 **How it is built**
+
 24. React, TypeScript and Vite. Rules, questions, helpline numbers and every sentence live in data files, in Hindi and English.
 25. A service worker precaches the app, so it works offline.
 26. Optional accounts and a daily log (Google or phone-code sign-in, a Postgres database with row level security), switched on only when configured. Built and tested in a local Postgres and against a simulated client. Not connected to a real project yet.
 27. Checks: 205 automated tests, an independent Python implementation agreeing on all 46 rule cases and on 12,420 generated answer sets, tests that render every screen in both languages, a small-screen layout audit, an accessibility audit, database tests, and CI on every pull request.
 
 **What is not done (say this out loud)**
+
 28. No clinician has reviewed the rules. The prototype label stays.
 29. Voice is tested only with a simulated recogniser, not on real phones. It needs internet on most phones.
 30. No recorded voice clips yet. The phone's own voice is used if it has one.
