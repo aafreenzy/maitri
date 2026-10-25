@@ -6,7 +6,7 @@ Built for recHERsion 2026, Problem Statement 1 (Women's Healthcare).
 
 > Education tool. It does not diagnose and cannot replace a health worker. The rules are a draft and have not been reviewed by a doctor. See "Honest limitations".
 
-## What it does
+## What it does :- 
 
 - **Check by tapping or by voice.** One question per screen with a picture, big Yes / No / Not sure buttons with tick and cross symbols, and Listen and Slow buttons. Or tap the microphone and say what is happening.
 - **Three result levels with word, shape and colour together:** RED octagon (go to the hospital now), AMBER triangle (see the ANM, ASHA or doctor today), GREEN circle ("No danger sign told", never "fine" or "safe"). A greyscale screenshot still reads.
