@@ -37,6 +37,7 @@ function Welcome({ onSkip }: { onSkip: () => void }) {
       <BorderBand />
       <Header hideMark />
       <main className="page-body">
+        <h1 className="visually-hidden">Maitri</h1>
         <div className="lang-hero">
           <MaitriMark size={56} />
           <Wordmark />
