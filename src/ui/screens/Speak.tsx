@@ -24,6 +24,7 @@ export default function Speak() {
   const [transcript, setTranscript] = useState('');
   const [stage, setStage] = useState<StageId | null>(null);
   const [removed, setRemoved] = useState<Record<string, boolean>>({});
+  const [changingStage, setChangingStage] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const listener = useRef<Listener | null>(null);
   const supported = recognitionSupported();
@@ -41,7 +42,7 @@ export default function Speak() {
     l.result.then(
       (text) => {
         if (!text.trim()) { setError(t('voice.nothing')); setPhase('idle'); return; }
-        setTranscript(text); setStage(null); setPhase('review');
+        setTranscript(text); setStage(null); setChangingStage(false); setPhase('review');
       },
       (e: unknown) => {
         const code = e instanceof SpeechError ? e.code : 'other';
@@ -89,9 +90,7 @@ export default function Speak() {
             <Glyph name={phase === 'listening' ? 'stop' : 'mic'} size={64} />
             <span>{phase === 'listening' ? t('voice.stop') : t('voice.start')}</span>
           </button>
-          <p role="status" className="card" style={{ minHeight: 64 }}>
-            {phase === 'listening' ? (interim || t('voice.listening')) : ''}
-          </p>
+          {phase === 'listening' && <p role="status" className="card lead">{interim || t('voice.listening')}</p>}
           <p className="muted small">{t('voice.privacy')}</p>
         </>
       )}
@@ -102,25 +101,32 @@ export default function Speak() {
             <b>{t('voice.heard')}</b>
             <p>{transcript}</p>
           </section>
-          {!effectiveStage && (
+          {effectiveStage && !changingStage && (
+            <div className="card row-card">
+              <Pictogram id={data.stages.find((x) => x.id === effectiveStage)?.icon ?? 'tier-unknown'} size={48} />
+              <span className="grow strong">{stageLabel(data.stages.find((x) => x.id === effectiveStage)!)}</span>
+              <Button className="small" onClick={() => setChangingStage(true)}>{t('common.change')}</Button>
+            </div>
+          )}
+          {(!effectiveStage || changingStage) && (
             <>
               <h2>{t('stage.title')}</h2>
               {data.stages.map((s) => (
-                <button key={s.id} type="button" className="card tap" onClick={() => setStage(s.id)}>
+                <button key={s.id} type="button" className="card tap" onClick={() => { setStage(s.id); setChangingStage(false); }}>
                   <Pictogram id={s.icon} size={56} /><span>{stageLabel(s)}</span>
                 </button>
               ))}
             </>
           )}
-          {effectiveStage && (
-            <section className="rows" style={{ gap: 12 }}>
+          {effectiveStage && !changingStage && (
+            <section className="stack">
               <h2>{signs.length ? t('voice.signs_title') : t('voice.no_signs')}</h2>
               {signs.map(([id, v]) => {
                 const q = data.questions.find((x) => x.id === id);
                 return (
-                  <div key={id} className="card" style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                  <div key={id} className="card row-card">
                     <Pictogram id={q?.icon ?? 'tier-unknown'} size={48} />
-                    <span style={{ flex: 1, fontWeight: 700 }}>{label(id)}</span>
+                    <span className="grow strong">{label(id)}</span>
                     <Glyph name={v === 'yes' ? 'tick' : 'question'} size={28} />
                     <Button className="small" onClick={() => setRemoved({ ...removed, [id]: true })}>{t('common.remove')}</Button>
                   </div>

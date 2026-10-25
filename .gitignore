@@ -4,3 +4,6 @@ dist
 .DS_Store
 audio-cache
 .vitest*
+.env.local
+.env.*.local
+tests/generated/

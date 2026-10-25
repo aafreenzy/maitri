@@ -1,6 +1,7 @@
 import { toPng } from 'html-to-image';
 
 export type ShareOutcome = 'shared' | 'downloaded';
+export type TextShareOutcome = 'shared' | 'copied';
 
 export async function slipToBlob(node: HTMLElement, render: typeof toPng = toPng): Promise<Blob> {
   if (document.fonts?.ready) await document.fonts.ready;
@@ -21,4 +22,25 @@ export async function shareSlip(node: HTMLElement, render: typeof toPng = toPng)
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   return 'downloaded';
+}
+
+export interface SlipTextParts {
+  title: string;
+  lines: { label: string; value: string }[];
+  footer: string;
+}
+
+/** Plain text version of the slip for messages. No name, no phone number, only what the slip already shows. */
+export function buildSlipText(p: SlipTextParts): string {
+  return [p.title, '', ...p.lines.map((l) => `${l.label}: ${l.value}`), '', p.footer].join('\n');
+}
+
+/** Opens the phone's share sheet with the text. Where that is missing, copies the text instead. */
+export async function shareText(text: string): Promise<TextShareOutcome> {
+  if (typeof navigator.share === 'function') {
+    await navigator.share({ text });
+    return 'shared';
+  }
+  await navigator.clipboard.writeText(text);
+  return 'copied';
 }

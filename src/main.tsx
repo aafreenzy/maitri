@@ -13,5 +13,8 @@ import './ui/styles/print.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
+import { registerOffline } from './lib/offline';
 
 createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>);
+
+registerOffline();

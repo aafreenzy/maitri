@@ -51,12 +51,12 @@ export function Header({ hideMark }: { hideMark?: boolean }) {
   );
 }
 
-export function Page({ children, actions, full, className = '' }: { children: ReactNode; actions?: ReactNode; full?: boolean; className?: string }) {
+export function Page({ children, actions, full, scrollable, className = '' }: { children: ReactNode; actions?: ReactNode; full?: boolean; scrollable?: boolean; className?: string }) {
   return (
     <div className={`page ${full ? 'full' : ''} ${className}`}>
       <Header />
-      <main className="page-body">{children}</main>
-      {actions && <div className="action-bar">{actions}</div>}
+      <main className="page-body" tabIndex={scrollable ? 0 : undefined}>{children}</main>
+      {actions && <footer className="action-bar">{actions}</footer>}
     </div>
   );
 }

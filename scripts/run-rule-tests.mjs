@@ -8,8 +8,9 @@ const r = spawnSync('npx', ['vitest', 'run', '--reporter=json', `--outputFile=${
 let j;
 try { j = JSON.parse(fs.readFileSync(outFile, 'utf8')); } catch { console.error('Could not read vitest output'); console.error(r.stderr); process.exit(1); }
 finally { fs.rmSync(tmp, { recursive: true, force: true }); }
+const ruleCases = JSON.parse(fs.readFileSync('tests/rule_cases.json', 'utf8')).cases.length;
 const report = {
-  passed: j.numPassedTests, total: j.numTotalTests, failed: j.numFailedTests,
+  passed: j.numPassedTests, total: j.numTotalTests, failed: j.numFailedTests, rule_cases: ruleCases,
   rules_version: rules.version, generated_at: new Date().toISOString(),
 };
 fs.mkdirSync('src/generated', { recursive: true });

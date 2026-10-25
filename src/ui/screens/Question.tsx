@@ -25,6 +25,7 @@ export default function Question() {
   const textRef = useRef<HTMLHeadingElement>(null);
   const [voiceMsg, setVoiceMsg] = useState<string | null>(null);
   const [listening, setListening] = useState(false);
+  const [pendingNo, setPendingNo] = useState<string | null>(null);
 
   useEffect(() => {
     textRef.current?.focus();
@@ -36,7 +37,7 @@ export default function Question() {
 
   const go = (value: Answer, viaVoice = false) => {
     dispatch({ type: 'answer', id: q.id, value });
-    setVoiceMsg(null);
+    setVoiceMsg(null); setPendingNo(null);
     // One RED sign decides the result, so stop asking and show it at once.
     const red = value === 'yes' && evaluate(state.stage!, { ...state.answers, [q.id]: value }).tier === 'RED';
     const opts = viaVoice || red ? { state: { auto: viaVoice } } : undefined;
@@ -48,7 +49,10 @@ export default function Question() {
     try {
       const text = await startListening({ lang: state.lang, continuous: false }).result;
       const a = parseAnswer(text);
-      if (a) go(a, true); else setVoiceMsg(t('voice.not_understood'));
+      // A misheard Yes only over-escalates. A misheard No would hide a sign, so a spoken No is confirmed first.
+      if (a === 'no') setPendingNo(text);
+      else if (a) go(a, true);
+      else setVoiceMsg(t('voice.not_understood'));
     } catch (e) {
       const code = e instanceof SpeechError ? e.code : 'other';
       setVoiceMsg(t(code === 'unsupported' ? 'voice.unsupported' : code === 'denied' ? 'voice.denied' : code === 'network' ? 'voice.network' : code === 'no-speech' ? 'voice.not_understood' : 'voice.error'));
@@ -66,18 +70,28 @@ export default function Question() {
           <Button variant="answer" onClick={() => go('yes')}><Glyph name="tick" size={36} />{t('common.yes')}</Button>
           <Button variant="answer" onClick={() => go('no')}><Glyph name="cross" size={36} />{t('common.no')}</Button>
         </div>
-        <Button variant="ghost" onClick={() => go('not_sure')}><Glyph name="question" size={28} />{t('common.not_sure')}</Button>
-        <Button variant="ghost" disabled={idx === 0} onClick={() => nav(`/q/${idx - 1}`)}>{t('common.back')}</Button>
+        <div className="answer-split">
+          <Button variant="ghost" disabled={idx === 0} onClick={() => nav(`/q/${idx - 1}`)}>{t('common.back')}</Button>
+          <Button variant="ghost" onClick={() => go('not_sure')}><Glyph name="question" size={28} />{t('common.not_sure')}</Button>
+        </div>
       </>
     }>
       <ProgressDots total={questions.length} current={idx} answered={answered} label={progress} />
       <span className="visually-hidden" aria-live="polite">{progress}</span>
       {intro && <p className="hint">{intro}</p>}
-      <div className="card q-card"><Pictogram id={q.icon} size={120} /></div>
-      <h1 className="q-text" style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--step-2)', fontWeight: 600 }} ref={textRef} tabIndex={-1}>{questionText(q)}</h1>
+      <div className="card q-card"><Pictogram id={q.icon} size={100} /></div>
+      <h1 className="q-text" ref={textRef} tabIndex={-1}>{questionText(q)}</h1>
       <Listen clipId={q.id} text={questionText(q)} />
       {recognitionSupported() && (
         <Button onClick={speak} loading={listening} aria-label={t('voice.answer')}><Glyph name="mic" size={28} />{listening ? t('voice.listening') : t('voice.answer')}</Button>
+      )}
+      {pendingNo !== null && (
+        <div className="card" role="alertdialog" aria-label={t('voice.confirm_no')}>
+          <p>{t('voice.heard_answer', { text: pendingNo })}</p>
+          <p className="lead">{t('voice.confirm_no')}</p>
+          <Button variant="primary" onClick={() => go('no', true)}>{t('voice.correct')}</Button>
+          <Button onClick={() => { setPendingNo(null); void speak(); }}>{t('voice.say_again')}</Button>
+        </div>
       )}
       {voiceMsg && <p className="error-box" role="alert">{voiceMsg}</p>}
       {state.answers[q.id] && <p className="muted small">{t(`common.${state.answers[q.id]}`)}</p>}

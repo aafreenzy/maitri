@@ -2,7 +2,7 @@ import { useState } from 'react';
 import rulesJson from '../../data/rules.json';
 import { data } from '../../engine/loadData';
 import type { StageId } from '../../engine/types';
-import { getLang, questionText, t, useLang } from '../../lib/i18n';
+import { confidenceLabel, getLang, questionText, t, useLang } from '../../lib/i18n';
 import { Button } from '../components/Button';
 import { Page } from '../components/Layout';
 
@@ -37,7 +37,7 @@ export default function RuleReview() {
       <p className="hint">{t('review.note')}</p>
       {error && <p className="error-box" role="alert">{error}</p>}
       {stages.map((st) => (
-        <section key={st} className="rows" style={{ gap: 12 }}>
+        <section key={st} className="stack">
           <h2>{data.stages.find((s) => s.id === st)![getLang() === 'hi' ? 'hi' : 'en']}</h2>
           {data.rules.filter((r) => r.stages.includes(st)).map((r) => {
             const qids = [r.question_id, ...(r.question_ids ?? []), ...(r.among ?? [])].filter(Boolean) as string[];
@@ -45,10 +45,10 @@ export default function RuleReview() {
             const invalid = ticked[r.id] && !(names[r.id] ?? '').trim();
             return (
               <div key={`${st}-${r.id}`} className="card">
-                <b>{r.id} · {Object.entries(r.tier_if).map(([k, v]) => `${k}: ${v}`).join(', ')}</b>
+                <b><span translate="no">{r.id}</span> · {Object.entries(r.tier_if).map(([k, v]) => t(k === 'yes' ? 'review.if_yes' : 'review.if_not_sure', { tier: t(`tier.${v}`) })).join(', ')}</b>
                 <p>{qids.map((id) => data.questions.find((q) => q.id === id)).map((q) => (q ? questionText(q) : '')).join(' / ')}</p>
-                <p className="muted small">{t('review.source')}: {src}. {t('review.confidence')}: {r.confidence}</p>
-                {r.note && <p className="muted small">{r.note}</p>}
+                <p className="muted small">{t('review.source')}: <span lang="en">{src}</span>. {t('review.confidence')}: {confidenceLabel(r.confidence)}</p>
+                {r.note && <p className="muted small" lang="en">{r.note}</p>}
                 <label className="tick"><input type="checkbox" checked={!!ticked[r.id]} onChange={(e) => setTicked({ ...ticked, [r.id]: e.target.checked })} />{t('review.mark_reviewed')}</label>
                 <div className="field">
                   <label htmlFor={`n-${st}-${r.id}`}>{t('review.reviewer_name')}</label>

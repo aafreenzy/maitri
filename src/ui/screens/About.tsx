@@ -17,7 +17,7 @@ export default function About() {
         <p>{t('safety.tiers_ours')}</p>
         <p>{t('safety.never_fine')}</p>
         <p>{t('safety.no_data')}</p>
-        {!anyReviewed && <p style={{ fontWeight: 700 }}>{t('safety.draft')}</p>}
+        {!anyReviewed && <p className="strong">{t('safety.draft')}</p>}
       </div>
       <Link className="btn" to="/trust">{t('trust.link')}</Link>
       <Link className="btn ghost" to="/review">{t('about.review_link')}</Link>

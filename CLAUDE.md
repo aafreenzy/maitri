@@ -17,7 +17,7 @@ Maitri (मैत्री) is an offline, Hindi-first danger-sign checker for p
 - **No numeric clinical thresholds in the UI** (blood pressure, temperature, Hb, pad count, kick count).
 - **Phone numbers come only from `src/data/config.json`.** Never hard-code a helpline. Never add 181. Only 14416 is confirmed; the others show their status on the Trust page.
 - **All user-facing text goes through `src/data/i18n/en.json` and `hi.json`.** Keep both files at key parity. Do not invent copy inside components.
-- **Privacy.** No accounts, analytics, cookies or third-party requests at runtime. No names or phone numbers anywhere. Answers stay in memory and sessionStorage. localStorage is used only by the opt-in ASHA list, with keys prefixed `maitri:`.
+- **Privacy.** No analytics, cookies or tracking. Accounts exist only when `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are set (decision D-17, 25 Oct 2026). The only external host is Supabase, contacted only after she signs in or saves a log entry. The emergency check never needs an account or a network and never contacts the backend. The `SUPABASE` service role key never goes in the app or in git. No names anywhere. Her phone number is held only by the sign-in service to send the code and is never written to our tables, the slip or logs. Answers stay in memory and sessionStorage unless she saves them to her log. localStorage is used only by the opt-in ASHA list and the sign-in session (`maitri:auth`), and Exit now clears every `maitri:` key.
 - **No secrets in git.** `SARVAM_API_KEY` is read from the environment only. Never print or log it.
 - **No fetal-sex features. No diagnosis wording. No probability scores.**
 - **Disclose the tiers.** RED/AMBER/GREEN is the team's own design, and the About page must say so.

@@ -11,6 +11,7 @@ import { CallButton } from '../components/CallButton';
 import { Header } from '../components/Layout';
 import { Listen } from '../components/Listen';
 import { Glyph } from '../icons/Glyph';
+import { SaveToLog } from '../components/SaveToLog';
 import { SignalShape } from '../components/SignalShape';
 
 export default function Result() {
@@ -55,19 +56,20 @@ export default function Result() {
       <main className="page-body">
         <SignalShape className="stamp" tier={r.tier} word={t(`tier.${r.tier}`)} />
         <h1 className="verdict" aria-live="polite">{title}</h1>
-        {body && <p style={{ fontSize: 'var(--step-1)', fontWeight: 600 }}>{body}</p>}
+        {body && <p className="lead">{body}</p>}
         {r.tier !== 'GREEN' && r.headlineReason && <p>{t('result.because', { signs: r.reasons.join(', ') })}</p>}
         {r.hasNotSure && <p className="wall-note">{t('result.not_sure_note')}</p>}
         {r.hasWellbeingFlag && <Link className="wall-note link" to="/support">{t('wellbeing.title')}. {t('result.wellbeing_card')}</Link>}
+        <SaveToLog />
         <Listen clipId={clip} text={`${title}. ${body}`} />
         <p className="small">{t('result.disclaimer_short')}</p>
       </main>
-      <div className="action-bar">
+      <footer className="action-bar">
         {r.tier !== 'GREEN' && <CallButton numberKey="ambulance_primary" />}
         {r.isRed && <Button className="ghosted" onClick={() => nav('/plan')}><Glyph name="list" size={28} />{t('result.family_plan')}</Button>}
         <Button className="ghosted" onClick={() => nav('/slip')}><Glyph name="doc" size={28} />{t('result.show_slip')}</Button>
         {r.tier === 'GREEN' && <Button className="white" onClick={() => { dispatch({ type: 'reset' }); nav('/stage'); }}>{t('result.check_again')}</Button>}
-      </div>
+      </footer>
     </div>
   );
 }
