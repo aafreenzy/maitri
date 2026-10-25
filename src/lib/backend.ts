@@ -16,7 +16,7 @@ let client: Promise<SupabaseClient> | null = null;
 export function getClient(): Promise<SupabaseClient> {
   if (!url || !key) return Promise.reject(new Error('not-configured'));
   client ??= import('@supabase/supabase-js').then((m) =>
-    m.createClient(url, key, { auth: { storageKey: 'maitri:auth', persistSession: true, autoRefreshToken: true } }),
+    m.createClient(url, key, { auth: { storageKey: 'maitri:auth', persistSession: true, autoRefreshToken: true, flowType: 'pkce', detectSessionInUrl: true } }),
   );
   return client;
 }
@@ -28,12 +28,13 @@ export function toIndianE164(input: string): string | null {
   return m ? `+91${m[1]}` : null;
 }
 
-export type BackendErrorCode = 'not-configured' | 'network' | 'too-many' | 'bad-code' | 'bad-phone' | 'other';
+export type BackendErrorCode = 'not-configured' | 'network' | 'too-many' | 'bad-code' | 'bad-phone' | 'provider-off' | 'other';
 
 export function backendErrorCode(e: unknown): BackendErrorCode {
   const err = e as { message?: string; status?: number; code?: string; name?: string } | null;
   const msg = (err?.message ?? '').toLowerCase();
   if (msg === 'not-configured') return 'not-configured';
+  if (msg.includes('provider is not enabled') || msg.includes('unsupported provider')) return 'provider-off';
   if (err?.status === 429 || msg.includes('rate limit') || msg.includes('too many')) return 'too-many';
   if (msg.includes('token') && (msg.includes('expired') || msg.includes('invalid'))) return 'bad-code';
   if (msg.includes('phone') && msg.includes('invalid')) return 'bad-phone';

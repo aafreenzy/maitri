@@ -162,7 +162,7 @@
   "account.delete_title": "Delete your account?",
   "account.delete_body": "This deletes your daily log and your sign-in. It cannot be undone.",
   "account.delete_yes": "Yes, delete everything",
-  "account.privacy": "We store the date, your answers and the result. The sign-in service holds your number to send the code. Exit now signs you out on this phone.",
+  "account.privacy": "We store the date, your answers and the result. The sign-in service holds your number or Google email to sign you in. Exit now signs you out on this phone.",
   "account.error.bad_phone": "Enter a 10-digit mobile number starting with 6, 7, 8 or 9.",
   "account.error.bad_code": "That code did not work. Check it and try again, or ask for a new code.",
   "account.error.too_many": "Too many tries. Wait a few minutes and try again.",
@@ -183,5 +183,9 @@
   "log.saved": "Saved for today. Saving again today replaces this entry.",
   "log.save_error": "Could not save. Check your internet and try again.",
   "log.signin_prompt": "Sign in to keep a daily log",
-  "log.disclaimer": "A log is not a diagnosis. If you feel worse, go to a health centre."
+  "log.disclaimer": "A log is not a diagnosis. If you feel worse, go to a health centre.",
+  "account.google": "Continue with Google",
+  "account.or": "or",
+  "account.google_account": "Google account {email}",
+  "account.error.google_off": "Google sign-in is not turned on yet. Use the phone code, or ask the project owner to turn it on."
 }

@@ -8,7 +8,7 @@ import { AuthProvider } from '../state/auth';
 import { SessionProvider, initialState } from '../state/session';
 
 interface Row { id: string; user_id: string; entry_date: string; phase: string; answers: Record<string, string>; tier: string; rules_version: string; note: null }
-const h = vi.hoisted(() => ({ rows: [] as Row[], session: null as null | { user: { id: string; phone: string } }, listeners: [] as ((e: string, s: unknown) => void)[], failList: false }));
+const h = vi.hoisted(() => ({ rows: [] as Row[], session: null as null | { user: { id: string; phone?: string; email?: string } }, listeners: [] as ((e: string, s: unknown) => void)[], failList: false, oauthError: null as null | { message: string }, oauthCalls: [] as unknown[] }));
 
 vi.mock('../lib/backend', async (orig) => {
   const real = await orig<typeof import('../lib/backend')>();
@@ -17,6 +17,7 @@ vi.mock('../lib/backend', async (orig) => {
       getSession: async () => ({ data: { session: h.session } }),
       onAuthStateChange: (cb: (e: string, s: unknown) => void) => { h.listeners.push(cb); return { data: { subscription: { unsubscribe() {} } } }; },
       signInWithOtp: vi.fn(async () => ({ error: null })),
+      signInWithOAuth: vi.fn(async (args: unknown) => { h.oauthCalls.push(args); return { error: h.oauthError }; }),
       verifyOtp: vi.fn(async ({ phone, token }: { phone: string; token: string }) => {
         if (token !== '123456') return { error: { message: 'Token has expired or is invalid' } };
         h.session = { user: { id: 'u1', phone: phone.slice(1) } };
@@ -43,7 +44,7 @@ vi.mock('../lib/backend', async (orig) => {
 const app = (path: string, initial = initialState) => render(
   <AuthProvider><SessionProvider initial={initial}><MemoryRouter initialEntries={[path]}><AppRoutes /></MemoryRouter></SessionProvider></AuthProvider>,
 );
-beforeEach(() => { h.rows = []; h.session = null; h.listeners = []; h.failList = false; setLang('en'); });
+beforeEach(() => { h.rows = []; h.session = null; h.listeners = []; h.failList = false; h.oauthError = null; h.oauthCalls = []; sessionStorage.clear(); setLang('en'); });
 afterEach(() => { sessionStorage.clear(); setLang('hi'); });
 
 describe('phone number check', () => {
@@ -79,6 +80,32 @@ describe('sign in', () => {
     await user.type(screen.getByLabelText('Code from the text message'), '123456');
     await user.click(screen.getByRole('button', { name: 'Sign in' }));
     expect(await screen.findByText(/No entries yet/)).toBeInTheDocument();
+  });
+});
+
+describe('google sign-in', () => {
+  it('sends her to Google with the right provider and remembers to open the log afterwards', async () => {
+    const user = userEvent.setup();
+    app('/account');
+    await user.click(await screen.findByRole('button', { name: /Continue with Google/ }));
+    expect(h.oauthCalls).toHaveLength(1);
+    expect(h.oauthCalls[0]).toMatchObject({ provider: 'google', options: { redirectTo: expect.stringContaining('http') } });
+    expect(sessionStorage.getItem('maitri:after-signin')).toBe('/log');
+  });
+
+  it('explains when Google sign-in is not turned on in the project', async () => {
+    h.oauthError = { message: 'Unsupported provider: provider is not enabled' };
+    const user = userEvent.setup();
+    app('/account');
+    await user.click(await screen.findByRole('button', { name: /Continue with Google/ }));
+    expect(await screen.findByRole('alert')).toHaveTextContent(/Google sign-in is not turned on yet/);
+  });
+
+  it('shows a masked address for a Google account, never the full email', async () => {
+    h.session = { user: { id: 'g1', email: 'asha.devi@gmail.com' } };
+    app('/account');
+    expect(await screen.findByText(/Google account a\*\*\*@gmail\.com/)).toBeInTheDocument();
+    expect(screen.queryByText(/asha\.devi/)).toBeNull();
   });
 });
 

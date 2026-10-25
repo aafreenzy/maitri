@@ -2,20 +2,21 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { backendErrorCode } from '../../lib/backend';
 import { t, useLang } from '../../lib/i18n';
-import { useAuth } from '../../state/auth';
+import { maskEmail, useAuth } from '../../state/auth';
 import { Button } from '../components/Button';
 import { Page } from '../components/Layout';
 import { Sheet } from '../components/Sheet';
+import { Glyph } from '../icons/Glyph';
 
 const ERR: Record<string, string> = {
   'bad-phone': 'account.error.bad_phone', 'bad-code': 'account.error.bad_code',
-  'too-many': 'account.error.too_many', network: 'account.error.network', other: 'account.error.other', 'not-configured': 'account.not_configured',
+  'too-many': 'account.error.too_many', 'provider-off': 'account.error.google_off', network: 'account.error.network', other: 'account.error.other', 'not-configured': 'account.not_configured',
 };
 
 export default function Account() {
   const nav = useNavigate();
   useLang();
-  const { configured, loading, user, sendCode, verifyCode, signOut, deleteAccount } = useAuth();
+  const { configured, loading, user, sendCode, signInWithGoogle, verifyCode, signOut, deleteAccount } = useAuth();
   const [phone, setPhone] = useState('');
   const [code, setCode] = useState('');
   const [sent, setSent] = useState(false);
@@ -42,7 +43,8 @@ export default function Account() {
         <h1>{t('account.title')}</h1>
         <div className="card">
           <b>{t('account.signed_in')}</b>
-          {user.phoneLast4 && <p className="muted">{t('account.number_ends', { last4: user.phoneLast4 })}</p>}
+          {user.email && <p className="muted">{t('account.google_account', { email: maskEmail(user.email) })}</p>}
+          {!user.email && user.phoneLast4 && <p className="muted">{t('account.number_ends', { last4: user.phoneLast4 })}</p>}
         </div>
         {error && <p className="error-box" role="alert">{error}</p>}
         <Button onClick={() => run(async () => { await signOut(); nav('/'); })} loading={busy}>{t('account.sign_out')}</Button>
@@ -60,6 +62,13 @@ export default function Account() {
   return (
     <Page>
       <h1>{t('account.title')}</h1>
+      {error && <p className="error-box" role="alert">{error}</p>}
+      {!sent && (
+        <>
+          <Button variant="answer" loading={busy} onClick={() => run(signInWithGoogle)}><Glyph name="google" size={28} />{t('account.google')}</Button>
+          <p className="muted centered">{t('account.or')}</p>
+        </>
+      )}
       {!sent ? (
         <form className="stack" onSubmit={(e) => { e.preventDefault(); void run(async () => { await sendCode(phone); setSent(true); }); }}>
           <div className="field">
@@ -67,7 +76,6 @@ export default function Account() {
             <input id="phone" type="tel" inputMode="numeric" autoComplete="tel-national" value={phone} aria-invalid={!!error || undefined} aria-describedby="phone-hint" onChange={(e) => setPhone(e.target.value)} />
             <span id="phone-hint" className="muted small">{t('account.phone_hint')}</span>
           </div>
-          {error && <p className="error-box" role="alert">{error}</p>}
           <button type="submit" className="btn primary" disabled={busy}>{t('account.send_code')}</button>
         </form>
       ) : (
@@ -77,7 +85,6 @@ export default function Account() {
             <label htmlFor="code">{t('account.code_label')}</label>
             <input id="code" type="text" inputMode="numeric" autoComplete="one-time-code" value={code} aria-invalid={!!error || undefined} onChange={(e) => setCode(e.target.value)} />
           </div>
-          {error && <p className="error-box" role="alert">{error}</p>}
           <button type="submit" className="btn primary" disabled={busy || code.trim().length < 4}>{t('account.verify')}</button>
           <Button variant="ghost" onClick={() => { setSent(false); setCode(''); setError(null); }}>{t('account.change_number')}</Button>
         </form>

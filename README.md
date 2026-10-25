@@ -60,9 +60,9 @@ tests           46 rule cases and the Python reference check
 docs            spec, build plan, design brief, pitch facts, sign-off log
 ```
 
-## Backend (optional, not connected)
+## Backend (optional)
 
-Sign-in by phone code and a daily log are built behind two settings, `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (see `.env.example`). With them unset the app shows no account features and makes no backend request. The schema is in `supabase/migrations/0001_init.sql` with row level security. This part was tested only against a simulated client. It needs a Supabase project, a text-message provider and a real-project test before use. Never put the service role key in this repository.
+Google sign-in, phone-code sign-in and a daily log are built behind two settings, `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (see `.env.example`). With them unset the app shows no account features and makes no backend request. The schema is in `supabase/migrations/0001_init.sql` with row level security. Setup steps are in `docs/BACKEND_SETUP.md`, and `npm run check:backend` verifies a project once it exists. Until a real project is connected and checked, treat this part as tested only against a simulated client. Never put the service role key in this repository.
 
 ## Deploy
 
