@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { setLang, t, useLang } from '../../lib/i18n';
 import { appInfo } from '../../lib/config';
 import { useSession } from '../../state/session';
+import { useAuth } from '../../state/auth';
 import { BorderBand } from '../components/BorderBand';
 import { Button } from '../components/Button';
 import { Listen } from '../components/Listen';
@@ -13,6 +14,7 @@ export default function Language() {
   const nav = useNavigate();
   const { dispatch } = useSession();
   const lang = useLang();
+  const { configured } = useAuth();
   const choose = (l: 'hi' | 'en') => { setLang(l); dispatch({ type: 'setLang', lang: l }); nav('/mode'); };
   return (
     <div className="page">
@@ -29,6 +31,7 @@ export default function Language() {
         <Button variant="primary" onClick={() => nav('/speak')}><Glyph name="mic" size={32} />{t('voice.entry')}</Button>
         <Button variant="answer" className="lang-btn" lang="hi" onClick={() => choose('hi')}>{t('lang.hi')}</Button>
         <Button variant="answer" className="lang-btn" lang="en" onClick={() => choose('en')}>{t('lang.en')}</Button>
+        {configured && <Button variant="ghost" onClick={() => nav('/log')}>{t('log.entry_link')}</Button>}
         <p className="hint" role="note">{t('proto.banner')}</p>
       </main>
     </div>

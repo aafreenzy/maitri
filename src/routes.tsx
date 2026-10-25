@@ -5,6 +5,8 @@ import { t } from './lib/i18n';
 import { Button } from './ui/components/Button';
 import { Page } from './ui/components/Layout';
 import About from './ui/screens/About';
+import Account from './ui/screens/Account';
+import Log from './ui/screens/Log';
 import Language from './ui/screens/Language';
 import Mode from './ui/screens/Mode';
 import Plan from './ui/screens/Plan';
@@ -41,6 +43,8 @@ export function AppRoutes() {
         <Route path="/plan" element={<Plan />} />
         <Route path="/slip" element={<Slip />} />
         <Route path="/support" element={<Support />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="/log" element={<Log />} />
         <Route path="/about" element={<About />} />
         <Route path="/trust" element={<Trust />} />
         <Route path="/asha" element={featureFlag('asha_list') ? <AshaList /> : <Navigate to="/" replace />} />

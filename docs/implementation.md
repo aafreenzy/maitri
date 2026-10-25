@@ -366,3 +366,20 @@ Not built yet. A draft schema is in `supabase/migrations/0001_init.sql`.
 - The danger-sign verdict is still computed on the phone from the same rules. The server stores results. It never decides them.
 - Before real users: legal review under the Digital Personal Data Protection Act 2023 (consent text, retention, deletion, breach plan), confirm the hosting region, a text-message provider with sender registration for India, and a plain explanation to women of what is stored.
 - Offline: the check-in form works without internet and syncs when the phone is online again. The emergency check never needs an account or a network.
+
+### 20.11 Backend status (26 Oct 2026 build)
+
+Built, tested only against a simulated client:
+- Phone and one-time-code sign-in (`/account`), sign out, and delete account (database function `delete_my_account`).
+- Daily log (`/log`): one entry per day, saved from the result screen with "Save to my daily log", with loading, empty and error states and delete. An entry is the stage's danger-sign answers and the result computed on the phone. It adds no new clinical rules or guidance. If her tier is GREEN the log says "No danger sign told", never "normal".
+- Everything is hidden unless `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are set. With them unset the app behaves exactly as before and makes no backend request.
+- The client is loaded on demand. The session is stored under `maitri:auth` so Exit now signs her out.
+- The content security policy now allows `https://*.supabase.co` for connections.
+
+Not done, needs the owner or other people:
+1. Create a Supabase project, run `supabase/migrations/0001_init.sql`, and turn on phone sign-in with a text-message provider (cost, and sender registration for India).
+2. Set the two variables in the host's environment settings. Never commit them.
+3. Test against the real project: sign in, row level security (a second account must not read the first account's rows), delete account, rate limits.
+4. Offline saving is not built. Saving needs internet and says so.
+5. Legal and privacy review, hosting-region check, and plain-language consent text, as in 20.10.
+6. Clinician review of the log screen wording. The daily questions are the existing danger-sign questions, so they carry the same draft status.

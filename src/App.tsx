@@ -1,6 +1,7 @@
 import { Component, type ReactNode } from 'react';
 import { lazy, Suspense } from 'react';
 import { Router } from './routes';
+import { AuthProvider } from './state/auth';
 import { SessionProvider } from './state/session';
 import { t } from './lib/i18n';
 
@@ -22,5 +23,5 @@ const Kit = lazy(() => import('./ui/dev/Kit'));
 
 export default function App() {
   if (window.location.search.includes('kit')) return <Suspense fallback={null}><Kit /></Suspense>;
-  return <Boundary><SessionProvider><Router /></SessionProvider></Boundary>;
+  return <Boundary><AuthProvider><SessionProvider><Router /></SessionProvider></AuthProvider></Boundary>;
 }
