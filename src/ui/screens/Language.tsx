@@ -7,6 +7,7 @@ import { Button } from '../components/Button';
 import { Listen } from '../components/Listen';
 import { MaitriMark, Wordmark } from '../components/MaitriMark';
 import { Header } from '../components/Layout';
+import { Glyph } from '../icons/Glyph';
 
 export default function Language() {
   const nav = useNavigate();
@@ -25,6 +26,7 @@ export default function Language() {
         </div>
         <h1>{t('lang.title')}</h1>
         <Listen clipId="lang_title" text={t('lang.title')} />
+        <Button variant="primary" onClick={() => nav('/speak')}><Glyph name="mic" size={32} />{t('voice.entry')}</Button>
         <Button variant="answer" className="lang-btn" lang="hi" onClick={() => choose('hi')}>{t('lang.hi')}</Button>
         <Button variant="answer" className="lang-btn" lang="en" onClick={() => choose('en')}>{t('lang.en')}</Button>
         <p className="hint" role="note">{t('proto.banner')}</p>

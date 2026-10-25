@@ -5,6 +5,7 @@ import { stageLabel, t, useLang } from '../../lib/i18n';
 import { useSession } from '../../state/session';
 import { Listen } from '../components/Listen';
 import { Page } from '../components/Layout';
+import { Glyph } from '../icons/Glyph';
 import { Pictogram } from '../icons/Pictogram';
 
 export default function Stage() {
@@ -22,6 +23,7 @@ export default function Stage() {
           <span>{stageLabel(s)}</span>
         </button>
       ))}
+      <Link className="btn primary" to="/speak"><Glyph name="mic" size={28} />{t('voice.entry')}</Link>
       {state.mode === 'asha' && featureFlag('asha_list') && (
         <Link className="btn" to="/asha">{t('asha.list_title')}</Link>
       )}
