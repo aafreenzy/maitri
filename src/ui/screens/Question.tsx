@@ -66,14 +66,16 @@ export default function Question() {
           <Button variant="answer" onClick={() => go('yes')}><Glyph name="tick" size={36} />{t('common.yes')}</Button>
           <Button variant="answer" onClick={() => go('no')}><Glyph name="cross" size={36} />{t('common.no')}</Button>
         </div>
-        <Button variant="ghost" onClick={() => go('not_sure')}><Glyph name="question" size={28} />{t('common.not_sure')}</Button>
-        <Button variant="ghost" disabled={idx === 0} onClick={() => nav(`/q/${idx - 1}`)}>{t('common.back')}</Button>
+        <div className="row">
+          <Button variant="ghost" disabled={idx === 0} onClick={() => nav(`/q/${idx - 1}`)}>{t('common.back')}</Button>
+          <Button variant="ghost" onClick={() => go('not_sure')}><Glyph name="question" size={28} />{t('common.not_sure')}</Button>
+        </div>
       </>
     }>
       <ProgressDots total={questions.length} current={idx} answered={answered} label={progress} />
       <span className="visually-hidden" aria-live="polite">{progress}</span>
       {intro && <p className="hint">{intro}</p>}
-      <div className="card q-card"><Pictogram id={q.icon} size={120} /></div>
+      <div className="card q-card"><Pictogram id={q.icon} size={100} /></div>
       <h1 className="q-text" style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--step-2)', fontWeight: 600 }} ref={textRef} tabIndex={-1}>{questionText(q)}</h1>
       <Listen clipId={q.id} text={questionText(q)} />
       {recognitionSupported() && (
