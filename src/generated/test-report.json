@@ -1,7 +1,8 @@
 {
-  "passed": 111,
-  "total": 111,
+  "passed": 180,
+  "total": 180,
   "failed": 0,
+  "rule_cases": 46,
   "rules_version": "0.1-draft",
-  "generated_at": "2026-10-25T05:44:26.040Z"
+  "generated_at": "2026-10-25T06:08:20.864Z"
 }
