@@ -136,3 +136,7 @@ html, body, #root { height: 100%; }
 .plain-list { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 8px; }
 /* In a scrolling column, nothing may shrink below its content. Otherwise buttons with a minimum height clip their text on short screens. */
 .page-body > * { flex-shrink: 0; }
+.sheet { max-height: 88dvh; overflow-y: auto; }
+.why-list { display: flex; flex-direction: column; gap: 12px; }
+.why-item { background: var(--chuna); border-radius: var(--r-button); padding: 12px 16px; display: flex; flex-direction: column; gap: 4px; }
+.sheet { color: var(--ink); }

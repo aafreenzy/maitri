@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { appInfo } from '../../lib/config';
+import { appInfo, getNumber } from '../../lib/config';
+import { t } from '../../lib/i18n';
+import { CallButton } from '../components/CallButton';
 import { backendErrorCode } from '../../lib/backend';
 import { useAuth } from '../../state/auth';
 import { BorderBand } from '../components/BorderBand';
@@ -44,6 +46,8 @@ function Welcome({ onSkip }: { onSkip: () => void }) {
           <p className="tag" lang="hi">{appInfo().tagline_hi}</p>
           <p className="tag">{appInfo().tagline_en}</p>
         </div>
+
+        <CallButton numberKey="ambulance_primary" white={false} text={`${t('home.emergency', { number: getNumber('ambulance_primary')?.number ?? '' })}`} />
 
         <Button variant="primary" onClick={onSkip}>
           <span style={{ display: 'block' }} lang="hi">बिना साइन इन किए जारी रखें</span>
