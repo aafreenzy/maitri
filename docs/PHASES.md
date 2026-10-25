@@ -637,3 +637,36 @@ Done when: README, demo script and slide outline are committed and the tag exist
 ## If you fall behind
 
 Drop in this order: P35, P33, P32. Never drop P05 (test gate), P21 (result), P22 (plan), P23 (slip), P26-P29 (audio and offline), P30 (Trust page), P34 (accessibility) or P36 (device QA). If P28 is blocked by the TTS key, ship with the browser fallback plus the "audio not available" message, and say so honestly in the demo. If time is under two hours at P21, skip P24 and P25's Support polish but keep the safety About page.
+
+---
+
+## Version 2 phases (not for the hackathon submission)
+
+Start only after the `v1-submission` tag exists. Read `docs/implementation.md` section 20 first. Update `CLAUDE.md` and the decisions log before the first v2 phase. Every v2 phase keeps the v1 rules: tests and build must pass, one commit per phase, i18n parity, numbers only from `config.json`, no invented clinical content.
+
+| Phase | Title | Depends on | Human input needed |
+|---|---|---|---|
+| V01 | Provider-independent audio script (manifest, dry run, one provider function) | P27 | Choose provider (D-19 area), key only for the real run |
+| V02 | Content source file format: every schedule row and scheme claim has `source` and `last_checked` | none | none |
+| V03 | Due-date tracker and antenatal visit list | V02 | Visit schedule read from the raw MCP card by a person, clinician review |
+| V04 | Vaccine and check-up schedule | V02 | Official immunisation schedule, clinician review |
+| V05 | Scheme help pages (JSSK, JSY, PMMVY) | V02 | Current official documents, local confirmation |
+| V06 | Family share link (data after the `#`) and share sheet | none | none |
+| V07 | Language framework for more than two languages (font subsets per script, key parity test across all languages, review status per language) | none | Native reviewers per language |
+| V08 | First added language end to end (strings, audio, review sign-off) | V07, V01 | Language choice, native reviewer |
+| V09 | Daily log on device (IndexedDB), timeline view | D-17 decided | Team decision |
+| V10 | Daily guidance rules and screen | V09 | Clinician review of every rule |
+| V11 | Reminder channel | D-18 decided | Team decision, provider account if any |
+| V12 | Facility finder | V02 | Verified dataset with a reuse licence |
+| V13 | Accessibility and device QA for all v2 screens | V03 to V12 | Real low-end phone |
+
+### Added 25 Oct 2026 (voice and backend)
+
+| Phase | Title | Status |
+|---|---|---|
+| V14 | Voice check: speak screen, voice answers, stop at first RED (docs section 20.8) | Built, tested with a mocked recogniser only. Needs real-phone testing. |
+| V15 | Supabase project, run `supabase/migrations/0001_init.sql`, turn on phone sign-in and connect a text-message provider | Owner creates the project and supplies the project URL and public anon key |
+| V16 | Sign-in screen (phone and code) and sign-out and delete-account | After V15 |
+| V17 | Daily check-in form for pregnancy and postpartum, on-device first, sync when signed in | After V16 and clinician review of the daily questions |
+| V18 | Daily guidance rules (concern flagged, tell your ASHA this week, go today) | Needs clinician review of every rule |
+| V19 | Server speech-to-text option (only if approved, see D-21) | Open |

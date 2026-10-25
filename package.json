@@ -12,7 +12,10 @@
     "test": "vitest run --passWithNoTests",
     "test:watch": "vitest",
     "test:report": "node scripts/run-rule-tests.mjs",
-    "check:contrast": "node scripts/check-contrast.mjs"
+    "check:contrast": "node scripts/check-contrast.mjs",
+    "audio:plan": "node scripts/generate-audio.mjs",
+    "audio:generate": "node scripts/generate-audio.mjs --run",
+    "audio:check": "node scripts/generate-audio.mjs --check"
   },
   "dependencies": {
     "react": "^18.3.1",

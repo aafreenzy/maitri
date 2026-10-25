@@ -33,8 +33,10 @@ describe('RED flow in English, family mode', () => {
     app('/');
     await startCheck(user, 'English', /family/i, /I had my baby/i);
     // Answer yes to heavy bleeding, no to everything else.
+    // One RED sign ends the check at once, so the loop stops after the bleeding question.
     for (let i = 0; i < 11; i++) {
       const h = screen.getByRole('heading', { level: 1 });
+      if (/hospital now/.test(h.textContent ?? '')) break;
       const isBleed = /Heavy bleeding/.test(h.textContent ?? '');
       await user.click(screen.getByRole('button', { name: isBleed ? 'Yes' : 'No' }));
     }
@@ -47,6 +49,7 @@ describe('RED flow in English, family mode', () => {
     expect(document.querySelectorAll('.slip input')).toHaveLength(0);
     const slip = document.querySelector('.slip') as HTMLElement;
     expect(within(slip).getByText('heavy bleeding')).toBeInTheDocument();
+    expect(within(slip).getByText('None')).toBeInTheDocument(); // nothing was left as not sure when the check ended early
   });
 });
 
@@ -76,9 +79,9 @@ describe('Back keeps answers', () => {
     const user = userEvent.setup();
     app('/');
     await startCheck(user, 'English', /pregnant or a new mother/i, /I am pregnant/i);
-    await user.click(screen.getByRole('button', { name: 'Yes' }));
+    await user.click(screen.getByRole('button', { name: 'No' }));
     await user.click(screen.getByRole('button', { name: 'Back' }));
-    expect(screen.getByText('Yes', { selector: 'p.muted' })).toBeInTheDocument();
+    expect(screen.getByText('No', { selector: 'p.muted' })).toBeInTheDocument();
   });
 });
 

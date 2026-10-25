@@ -1,0 +1,35 @@
+{
+  "version": "0.1-draft",
+  "status": "DRAFT. Word lists for turning spoken words into danger-sign answers. Needs review by a native Hindi speaker and a clinician before real use. A mention always counts (no negation handling), and the woman can remove a wrong sign on the review screen.",
+  "stage_phrases": {
+    "after_birth": ["बच्चा हो गया", "बच्चा हुआ", "बच्चा पैदा", "डिलीवरी हो गई", "डिलीवरी के बाद", "प्रसव के बाद", "delivered", "gave birth", "after delivery", "after birth", "had my baby", "had the baby", "bachcha ho gaya", "bacha ho gaya", "delivery ke baad"],
+    "labour": ["लेबर", "प्रसव", "दर्द शुरू", "labour", "labor", "contraction", "pains started", "labour pain", "pain shuru", "dard shuru"],
+    "pregnant": ["गर्भवती", "प्रेग्नेंट", "pregnant", "pregnancy", "garbhwati", "pregnent"]
+  },
+  "bleeding": {
+    "question_by_stage": { "pregnant": "q_bleed_preg", "labour": "q_bleed_preg", "after_birth": "q_bleed_pp" },
+    "mention": ["खून", "रक्त", "ब्लीडिंग", "bleed", "blood", "khoon", "khun", "rakt"],
+    "heavy": ["बहुत", "ज्यादा", "भीग", "रुक नहीं", "रुक ही नहीं", "heavy", "soak", "won't stop", "wont stop", "not stopping", "bahut", "zyada", "jyada", "ruk nahi"]
+  },
+  "signs": {
+    "q_fits": { "yes": ["दौरे", "दौरा", "झटके", "झटका", "मिर्गी", "बेहोश", "होश नहीं", "उठ नहीं", "fits", "fit ", "seizure", "convuls", "faint", "unconscious", "not waking", "behosh", "daura", "jhatke"] },
+    "q_headache_vision": { "yes": ["सिरदर्द", "सर दर्द", "सिर में दर्द", "सर में दर्द", "सिर दर्द", "धुंधला", "आँखों के आगे", "दिखाई नहीं", "headache", "head ache", "blurred", "blurry", "vision", "sir dard", "sar dard", "dhundhla"] },
+    "q_swelling": { "yes": ["सूजन", "सूज", "swelling", "swollen", "sujan"] },
+    "q_fever": { "yes": ["बुखार", "fever", "bukhar", "bukhaar"] },
+    "q_discharge": { "yes": ["बदबू", "स्राव", "discharge", "smelly", "bad smell", "badbu"] },
+    "q_water_leak": { "yes": ["पानी बह", "पानी निकल", "पानी की थैली", "पानी टूट", "water broke", "waters broke", "water leak", "leaking water", "paani beh", "pani beh", "paani nikal", "thaili phat"] },
+    "q_pale_breathless": { "yes": ["बहुत पीला", "बहुत कमज़ोर", "बहुत कमजोर", "साँस फूल", "सांस फूल", "very pale", "very weak", "short of breath", "breathless", "saans phool"], "not_sure": ["पीला", "कमज़ोर", "कमजोर", "कमज़ोरी", "कमजोरी", "चक्कर", "pale", "weak", "dizzy", "kamzor", "chakkar"] },
+    "q_hard_breath": { "yes": ["साँस नहीं ले", "सांस नहीं ले", "साँस नहीं आ", "सांस नहीं आ", "साँस लेने में", "सांस लेने में", "दम घुट", "can't breathe", "cant breathe", "cannot breathe", "hard to breathe", "difficulty breathing", "saans nahi", "saans lene mein"], "not_sure": ["साँस", "सांस", "breath", "saans"] },
+    "q_belly_pain": { "yes": ["पेट में बहुत दर्द", "पेट में तेज़ दर्द", "पेट में तेज दर्द", "पेट में बहुत तेज़", "bad belly pain", "severe belly pain", "severe stomach pain", "very bad stomach pain", "pet mein bahut dard", "pet me bahut dard"], "not_sure": ["पेट में दर्द", "पेट दर्द", "stomach pain", "belly pain", "stomach ache", "pet dard", "pet mein dard", "pet me dard"] },
+    "q_baby_moves": { "yes": ["बच्चा नहीं हिल", "बच्चा हिल नहीं", "हलचल नहीं", "baby not moving", "baby is not moving", "baby stopped moving", "no movement", "bachcha nahi hil", "bacha nahi hil"], "not_sure": ["बच्चा कम हिल", "हलचल कम", "baby moving less", "less movement", "kam hil"] },
+    "q_leg_pain": { "yes": ["पिंडली", "पैर में दर्द", "पैर में सूजन", "calf", "leg pain", "leg swelling", "pair mein dard", "pair me dard"] },
+    "q_confused": { "yes": ["उलझन", "अजीब बात", "अजीब तरह", "confused", "talking strangely", "behaving strangely", "ajeeb"] },
+    "q_long_labour": { "yes": ["12 घंटे", "बारह घंटे", "12 hours", "twelve hours", "12 ghante", "barah ghante"] },
+    "q_wellbeing": { "yes": ["उदास", "निराश", "मरने का", "खुद को नुकसान", "बच्चे को नुकसान", "depress", "hopeless", "want to die", "harm myself", "harm the baby", "udaas", "nirash"] }
+  },
+  "answers": {
+    "not_sure": ["पता नहीं", "पक्का नहीं", "मालूम नहीं", "not sure", "don't know", "dont know", "pata nahi", "pata nahin", "maloom nahi"],
+    "yes": ["हाँ", "हां", "हा", "जी", "है", "हो रहा", "हो रही", "yes", "yeah", "yep", "haan", "han", "ha", "ji", "hai", "ho raha", "ho rahi"],
+    "no": ["नहीं", "नही", "ना", "नहि", "no", "nope", "nahi", "nahin", "na"]
+  }
+}

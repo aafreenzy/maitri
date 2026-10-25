@@ -1,0 +1,422 @@
+[
+  {
+    "id": "q_fits",
+    "lang": "hi",
+    "text": "दौरे (झटके) पड़ना, बेहोश होना, या जगाने पर भी न उठना?",
+    "chars": 53
+  },
+  {
+    "id": "q_bleed_preg",
+    "lang": "hi",
+    "text": "अभी योनि से खून आ रहा है?",
+    "chars": 25
+  },
+  {
+    "id": "q_bleed_pp",
+    "lang": "hi",
+    "text": "बच्चे के जन्म के बाद बहुत ज़्यादा खून। कपड़ा कुछ ही मिनट में भीग जाए, या खून रुके ही नहीं?",
+    "chars": 90
+  },
+  {
+    "id": "q_headache_vision",
+    "lang": "hi",
+    "text": "बहुत तेज़ सिरदर्द, या आँखों के आगे धुंधला दिखना?",
+    "chars": 48
+  },
+  {
+    "id": "q_swelling",
+    "lang": "hi",
+    "text": "चेहरे, हाथों या पूरे शरीर में सूजन (सिर्फ़ पैरों में नहीं)?",
+    "chars": 59
+  },
+  {
+    "id": "q_fever",
+    "lang": "hi",
+    "text": "तेज़ बुखार (शरीर बहुत गरम)?",
+    "chars": 27
+  },
+  {
+    "id": "q_discharge",
+    "lang": "hi",
+    "text": "योनि से बदबूदार स्राव?",
+    "chars": 22
+  },
+  {
+    "id": "q_water_leak",
+    "lang": "hi",
+    "text": "प्रसव-दर्द शुरू हुए बिना पानी की थैली फटना या पानी बहना?",
+    "chars": 56
+  },
+  {
+    "id": "q_pale_breathless",
+    "lang": "hi",
+    "text": "बहुत पीलापन और कमज़ोरी, या साँस फूलना?",
+    "chars": 38
+  },
+  {
+    "id": "q_hard_breath",
+    "lang": "hi",
+    "text": "साँस लेने में बहुत कठिनाई?",
+    "chars": 26
+  },
+  {
+    "id": "q_belly_pain",
+    "lang": "hi",
+    "text": "पेट में बहुत तेज़ दर्द?",
+    "chars": 23
+  },
+  {
+    "id": "q_baby_moves",
+    "lang": "hi",
+    "text": "पेट में बच्चा रोज़ से बहुत कम हिल रहा है, या बिल्कुल नहीं हिल रहा?",
+    "chars": 66
+  },
+  {
+    "id": "q_leg_pain",
+    "lang": "hi",
+    "text": "एक पैर की पिंडली में दर्द या सूजन?",
+    "chars": 34
+  },
+  {
+    "id": "q_confused",
+    "lang": "hi",
+    "text": "उलझन में होना, या अजीब तरह से बोलना?",
+    "chars": 36
+  },
+  {
+    "id": "q_long_labour",
+    "lang": "hi",
+    "text": "प्रसव का दर्द 12 घंटे से ज़्यादा हो गया?",
+    "chars": 40
+  },
+  {
+    "id": "q_wellbeing",
+    "lang": "hi",
+    "text": "बहुत उदास या निराश महसूस करना, या खुद को या बच्चे को नुकसान पहुँचाने का ख़्याल?",
+    "chars": 79
+  },
+  {
+    "id": "stage_pregnant",
+    "lang": "hi",
+    "text": "मैं गर्भवती हूँ",
+    "chars": 15
+  },
+  {
+    "id": "stage_labour",
+    "lang": "hi",
+    "text": "प्रसव का दर्द शुरू हो गया है",
+    "chars": 28
+  },
+  {
+    "id": "stage_after_birth",
+    "lang": "hi",
+    "text": "बच्चा हो चुका है (42 दिन तक)",
+    "chars": 28
+  },
+  {
+    "id": "stage_title",
+    "lang": "hi",
+    "text": "आप अभी किस स्थिति में हैं?",
+    "chars": 26
+  },
+  {
+    "id": "lang_title",
+    "lang": "hi",
+    "text": "अपनी भाषा चुनिए",
+    "chars": 15
+  },
+  {
+    "id": "mode_title",
+    "lang": "hi",
+    "text": "मैत्री कौन इस्तेमाल कर रहा है?",
+    "chars": 30
+  },
+  {
+    "id": "intro_woman",
+    "lang": "hi",
+    "text": "अपने बारे में जवाब दीजिए। हाँ, नहीं या पक्का नहीं पता दबाइए।",
+    "chars": 60
+  },
+  {
+    "id": "intro_asha",
+    "lang": "hi",
+    "text": "महिला से पूछिए, फिर उसका जवाब दबाइए।",
+    "chars": 36
+  },
+  {
+    "id": "intro_family",
+    "lang": "hi",
+    "text": "उनके बारे में जवाब दीजिए। हाँ, नहीं या पक्का नहीं पता दबाइए।",
+    "chars": 60
+  },
+  {
+    "id": "result_RED",
+    "lang": "hi",
+    "text": "अभी अस्पताल जाइए. एम्बुलेंस के लिए एक शून्य आठ पर कॉल कीजिए। ठीक होने का इंतज़ार मत कीजिए।",
+    "chars": 90
+  },
+  {
+    "id": "result_RED_family",
+    "lang": "hi",
+    "text": "उन्हें अभी अस्पताल ले जाइए. एम्बुलेंस के लिए एक शून्य आठ पर कॉल कीजिए। ठीक होने का इंतज़ार मत कीजिए।",
+    "chars": 100
+  },
+  {
+    "id": "result_AMBER",
+    "lang": "hi",
+    "text": "आज ही ANM, आशा या डॉक्टर को दिखाइए. कल तक इंतज़ार मत कीजिए। तबीयत बिगड़े तो अस्पताल जाइए और एक शून्य आठ पर कॉल कीजिए।",
+    "chars": 117
+  },
+  {
+    "id": "result_AMBER_family",
+    "lang": "hi",
+    "text": "उन्हें आज ही ANM, आशा या डॉक्टर को दिखाइए. कल तक इंतज़ार मत कीजिए। तबीयत बिगड़े तो अस्पताल जाइए और एक शून्य आठ पर कॉल कीजिए।",
+    "chars": 124
+  },
+  {
+    "id": "result_GREEN",
+    "lang": "hi",
+    "text": "कोई ख़तरे का लक्षण नहीं बताया गया. तबीयत बिगड़े या चिंता हो तो स्वास्थ्य केंद्र जाइए। नियमित जाँच कराते रहिए।",
+    "chars": 109
+  },
+  {
+    "id": "plan_step1",
+    "lang": "hi",
+    "text": "एम्बुलेंस के लिए अभी एक शून्य आठ पर कॉल कीजिए।",
+    "chars": 46
+  },
+  {
+    "id": "plan_step2",
+    "lang": "hi",
+    "text": "तय कीजिए कि उनके साथ कौन जाएगा। MCP कार्ड और सारे मेडिकल काग़ज़ तैयार रखिए।",
+    "chars": 75
+  },
+  {
+    "id": "plan_step3",
+    "lang": "hi",
+    "text": "मैत्री की पर्ची एम्बुलेंस टीम या अस्पताल को दिखाइए।",
+    "chars": 51
+  },
+  {
+    "id": "plan_step4",
+    "lang": "hi",
+    "text": "निःशुल्क परिवहन और इलाज के बारे में पूछिए। सरकारी अस्पताल JSSK के तहत यह देते हैं।",
+    "chars": 82
+  },
+  {
+    "id": "wellbeing_body",
+    "lang": "hi",
+    "text": "बच्चे के जन्म के बाद बहुत उदास रहना आम है और इसका इलाज हो सकता है। कृपया आज ही अपनी आशा, ANM या डॉक्टर को बताइए।",
+    "chars": 112
+  },
+  {
+    "id": "q_fits",
+    "lang": "en",
+    "text": "Fits (shaking), fainting, or not waking up?",
+    "chars": 43
+  },
+  {
+    "id": "q_bleed_preg",
+    "lang": "en",
+    "text": "Bleeding from the vagina now?",
+    "chars": 29
+  },
+  {
+    "id": "q_bleed_pp",
+    "lang": "en",
+    "text": "Heavy bleeding after birth. A cloth soaks in minutes, or the bleeding does not stop?",
+    "chars": 84
+  },
+  {
+    "id": "q_headache_vision",
+    "lang": "en",
+    "text": "Very bad headache, or blurred vision?",
+    "chars": 37
+  },
+  {
+    "id": "q_swelling",
+    "lang": "en",
+    "text": "Swelling of the face, hands or whole body (not just the feet)?",
+    "chars": 62
+  },
+  {
+    "id": "q_fever",
+    "lang": "en",
+    "text": "High fever (body very hot)?",
+    "chars": 27
+  },
+  {
+    "id": "q_discharge",
+    "lang": "en",
+    "text": "Bad-smelling discharge from the vagina?",
+    "chars": 39
+  },
+  {
+    "id": "q_water_leak",
+    "lang": "en",
+    "text": "Water bag burst, or water leaking, without labour pains?",
+    "chars": 56
+  },
+  {
+    "id": "q_pale_breathless",
+    "lang": "en",
+    "text": "Very pale and weak, or short of breath?",
+    "chars": 39
+  },
+  {
+    "id": "q_hard_breath",
+    "lang": "en",
+    "text": "Great difficulty breathing?",
+    "chars": 27
+  },
+  {
+    "id": "q_belly_pain",
+    "lang": "en",
+    "text": "Very bad belly pain?",
+    "chars": 20
+  },
+  {
+    "id": "q_baby_moves",
+    "lang": "en",
+    "text": "Baby moving much less than usual, or not at all?",
+    "chars": 48
+  },
+  {
+    "id": "q_leg_pain",
+    "lang": "en",
+    "text": "Pain or swelling in one calf?",
+    "chars": 29
+  },
+  {
+    "id": "q_confused",
+    "lang": "en",
+    "text": "Confused, or talking strangely?",
+    "chars": 31
+  },
+  {
+    "id": "q_long_labour",
+    "lang": "en",
+    "text": "Labour pains for more than 12 hours?",
+    "chars": 36
+  },
+  {
+    "id": "q_wellbeing",
+    "lang": "en",
+    "text": "Feeling very sad or hopeless, or thoughts of harming self or the baby?",
+    "chars": 70
+  },
+  {
+    "id": "stage_pregnant",
+    "lang": "en",
+    "text": "I am pregnant",
+    "chars": 13
+  },
+  {
+    "id": "stage_labour",
+    "lang": "en",
+    "text": "Labour pains have started",
+    "chars": 25
+  },
+  {
+    "id": "stage_after_birth",
+    "lang": "en",
+    "text": "I had my baby (up to 42 days)",
+    "chars": 29
+  },
+  {
+    "id": "stage_title",
+    "lang": "en",
+    "text": "Where are you now?",
+    "chars": 18
+  },
+  {
+    "id": "lang_title",
+    "lang": "en",
+    "text": "Choose your language",
+    "chars": 20
+  },
+  {
+    "id": "mode_title",
+    "lang": "en",
+    "text": "Who is using Maitri?",
+    "chars": 20
+  },
+  {
+    "id": "intro_woman",
+    "lang": "en",
+    "text": "Answer for yourself. Tap Yes, No or Not sure.",
+    "chars": 45
+  },
+  {
+    "id": "intro_asha",
+    "lang": "en",
+    "text": "Ask the woman, then tap her answer.",
+    "chars": 35
+  },
+  {
+    "id": "intro_family",
+    "lang": "en",
+    "text": "Answer for her. Tap Yes, No or Not sure.",
+    "chars": 40
+  },
+  {
+    "id": "result_RED",
+    "lang": "en",
+    "text": "Go to the hospital now. Call one zero eight for an ambulance. Do not wait to see if it gets better.",
+    "chars": 99
+  },
+  {
+    "id": "result_RED_family",
+    "lang": "en",
+    "text": "She needs to go to the hospital now. Call one zero eight for an ambulance. Do not wait to see if it gets better.",
+    "chars": 112
+  },
+  {
+    "id": "result_AMBER",
+    "lang": "en",
+    "text": "See the ANM, ASHA or doctor today. Do not wait until tomorrow. If she feels worse, go to the hospital and call one zero eight.",
+    "chars": 126
+  },
+  {
+    "id": "result_AMBER_family",
+    "lang": "en",
+    "text": "She needs to see the ANM, ASHA or doctor today. Do not wait until tomorrow. If she feels worse, go to the hospital and call one zero eight.",
+    "chars": 139
+  },
+  {
+    "id": "result_GREEN",
+    "lang": "en",
+    "text": "No danger sign told. If she feels worse or you are worried, go to the health centre. Keep your regular check-ups.",
+    "chars": 113
+  },
+  {
+    "id": "plan_step1",
+    "lang": "en",
+    "text": "Call one zero eight for an ambulance now.",
+    "chars": 41
+  },
+  {
+    "id": "plan_step2",
+    "lang": "en",
+    "text": "Ask who will go with her. Keep the MCP card and any medical papers ready.",
+    "chars": 73
+  },
+  {
+    "id": "plan_step3",
+    "lang": "en",
+    "text": "Show the Maitri slip to the ambulance team or the hospital.",
+    "chars": 59
+  },
+  {
+    "id": "plan_step4",
+    "lang": "en",
+    "text": "Ask about free transport and care. Government hospitals provide these under JSSK.",
+    "chars": 81
+  },
+  {
+    "id": "wellbeing_body",
+    "lang": "en",
+    "text": "Feeling very sad after birth is common and it can be treated. Please tell your ASHA, ANM or doctor today.",
+    "chars": 105
+  }
+]

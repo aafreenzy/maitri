@@ -21,7 +21,7 @@ export function useResult() {
     headlineReason: reasons[0] ?? '',
     reasons,
     yesLabels: result.yes_ids.map(label),
-    unsureLabels: result.not_sure_ids.map(label),
+    unsureLabels: result.not_sure_ids.filter((id) => answers[id] === 'not_sure').map(label),
     hasNotSure: result.not_sure_ids.length > 0 && Object.values(answers).includes('not_sure'),
     hasWellbeingFlag: result.flags.includes('wellbeing_support'),
     isRed: result.tier === 'RED', isAmber: result.tier === 'AMBER',

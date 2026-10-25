@@ -48,3 +48,21 @@ Lives saved. Reduced mortality. Accuracy, sensitivity or validation. Clinical ap
 - WHO Managing complications in pregnancy and childbirth (chapters C and E, summary supplied by the team, not independently read): https://www.who.int/publications/i/item/9789241565493
 - JSSK guidelines: https://nhm.gov.in/New_Updates_2018/NHM_Components/RMNCHA/MH/Guidelines/JSSK_Final_English.pdf
 - Tele-MANAS (PIB): https://pib.gov.in/PressReleasePage.aspx?PRID=2022796
+
+## Checks on a pasted regional summary (25 Oct 2026)
+
+A summary pasted into the project was checked against sources found by web search. Do not copy its numbers into slides or the README until each is confirmed in the primary bulletin.
+
+| Claim in the pasted summary | Result of the check | Label |
+|---|---|---|
+| Madhya Pradesh has "the highest infant mortality rate in India at roughly 59 per 1,000" | Out of date. 59 is the 2011 value in an RBI table of SRS data. Later values in the same sources: about 40 in SRS 2022 (reported as the highest among states, national 26) and 37 in 2023. Use the latest SRS figure, not 59. | [Secondary], confirm in SRS |
+| MP maternal mortality "elevated" | Supported. MMR 142 per 100,000 in 2021-23 (159 in 2020-22). National MMR 88. | [Secondary], RBI reproduction of SRS Table 5 |
+| Assam among the worst | Assam MMR 110 in 2021-23 (125 in 2020-22), above the national 88. Assam is not one of the EAG states. SRS tables have grouped it with them, so say "EAG states and Assam", not "EAG states including Assam". | [Secondary] |
+| Sidhi district above 200 deaths per 100,000 (written "Siddhi") | Not verified. SRS does not normally publish district MMR. Leave out unless a district source is found. | Unverified |
+| Haemorrhage 47%, infections 12%, hypertensive disorders "0.6.2, 0.6.8" | The last figure is garbled and the source is a video link. Do not use. | Unusable |
+| UP 54.4 lakh and Bihar 30.7 lakh registered births, Maharashtra 19.2 lakh | Not verified. The headline figure we already use is about 25.2 million registered births in 2023 [Secondary]. Registered births are not the same as estimated births. | Unverified |
+| UP MMR | No 2021-23 figure found. One secondary source gives 154 for 2022-24. Do not use without the bulletin. | Unverified |
+
+The pasted summary also cites YouTube videos and a 2014 news article. Those are not acceptable sources for slides.
+
+Source links used for the checks: RBI state-wise IMR table (SRS data) https://website.rbi.org.in/or/web/rbi/-/publications/table-4-state-wise-infant-mortality-rate ; RBI state-wise MMR table https://website.rbi.org.in/as/web/rbi/-/publications/table-5-state-wise-maternal-mortality-ratio ; coverage of SRS 2022 for MP https://www.thenewsminute.com/news/mp-battles-maternal-infant-mortality-crisis-as-progress-lags-behind-national-average-srs-report .

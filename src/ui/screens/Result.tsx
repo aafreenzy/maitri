@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { hasInteracted, play } from '../../lib/audio';
 import { saveCheck } from '../../lib/asha';
 import { getNumber } from '../../lib/config';
 import { t, useLang } from '../../lib/i18n';
@@ -9,6 +10,7 @@ import { Button } from '../components/Button';
 import { CallButton } from '../components/CallButton';
 import { Header } from '../components/Layout';
 import { Listen } from '../components/Listen';
+import { Glyph } from '../icons/Glyph';
 import { SignalShape } from '../components/SignalShape';
 
 export default function Result() {
@@ -17,8 +19,10 @@ export default function Result() {
   useLang();
   const r = useResult();
   const saved = useRef(false);
+  const auto = (useLocation().state as { auto?: boolean } | null)?.auto === true;
 
   const tier = r?.tier;
+  const familyMode = state.mode === 'family' || state.mode === 'asha';
   useEffect(() => {
     if (!r || saved.current) return;
     saved.current = true;
@@ -27,6 +31,15 @@ export default function Result() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tier]);
 
+  useEffect(() => {
+    if (!auto || !r || !hasInteracted()) return;
+    const num0 = getNumber('ambulance_primary');
+    const title0 = t(`result.${r.tier}.title${familyMode && r.tier !== 'GREEN' ? '_family' : ''}`);
+    const body0 = r.tier !== 'GREEN' && !num0 ? '' : t(`result.${r.tier}.body`, { number: num0?.number ?? '' });
+    void play(`result_${r.tier}${familyMode && r.tier !== 'GREEN' ? '_family' : ''}`, { text: `${title0}. ${body0}` });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auto, tier]);
+
   if (!r || !state.stage) return <Navigate to="/" replace />;
   if (Object.keys(state.answers).length === 0) return <Navigate to="/q/0" replace />;
 
@@ -34,7 +47,7 @@ export default function Result() {
   const family = state.mode === 'family' || state.mode === 'asha';
   const title = t(`result.${r.tier}.title${family && r.tier !== 'GREEN' ? '_family' : ''}`);
   const body = r.tier !== 'GREEN' && !num ? '' : t(`result.${r.tier}.body`, { number: num?.number ?? '' });
-  const clip = `result_${r.tier}`;
+  const clip = `result_${r.tier}${family && r.tier !== 'GREEN' ? '_family' : ''}`;
 
   return (
     <div className={`page full wall ${r.tier} ${typeof window !== 'undefined' && window.location.search.includes('grayscale') ? 'grayscale' : ''}`}>
@@ -51,8 +64,8 @@ export default function Result() {
       </main>
       <div className="action-bar">
         {r.tier !== 'GREEN' && <CallButton numberKey="ambulance_primary" />}
-        {r.isRed && <Button className="ghosted" onClick={() => nav('/plan')}>{t('result.family_plan')}</Button>}
-        <Button className="ghosted" onClick={() => nav('/slip')}>{t('result.show_slip')}</Button>
+        {r.isRed && <Button className="ghosted" onClick={() => nav('/plan')}><Glyph name="list" size={28} />{t('result.family_plan')}</Button>}
+        <Button className="ghosted" onClick={() => nav('/slip')}><Glyph name="doc" size={28} />{t('result.show_slip')}</Button>
         {r.tier === 'GREEN' && <Button className="white" onClick={() => { dispatch({ type: 'reset' }); nav('/stage'); }}>{t('result.check_again')}</Button>}
       </div>
     </div>

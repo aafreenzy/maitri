@@ -11,6 +11,7 @@ import Plan from './ui/screens/Plan';
 import Question from './ui/screens/Question';
 import Result from './ui/screens/Result';
 import Slip from './ui/screens/Slip';
+import Speak from './ui/screens/Speak';
 import Stage from './ui/screens/Stage';
 import Support from './ui/screens/Support';
 
@@ -34,6 +35,7 @@ export function AppRoutes() {
         <Route path="/" element={<Language />} />
         <Route path="/mode" element={<Mode />} />
         <Route path="/stage" element={<Stage />} />
+        <Route path="/speak" element={<Speak />} />
         <Route path="/q/:index" element={<Question />} />
         <Route path="/result" element={<Result />} />
         <Route path="/plan" element={<Plan />} />

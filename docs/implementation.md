@@ -270,3 +270,99 @@ Use this one for effectiveness: "In a Kenyan RCT of an SMS service with a triage
 ## 19. Known gaps (say them out loud if asked)
 
 Rules not clinician reviewed. Hindi not yet reviewed by a native speaker unless step 3 above is done. Five signs lack primary-source wording (breathing, belly pain, baby movement, calf pain, mental health). Helpline numbers unconfirmed except 14416. Most statistics are secondary sources. No field testing with real users. No regulatory opinion. Audio quality depends on the TTS provider and needs human review.
+
+## 20. Version 2 roadmap (after the hackathon submission)
+
+Status: planned, not built. Nothing in this section applies to the v1 submission. The v1 rules in sections 3, 4 and 12 and in `CLAUDE.md` stay in force until the `v1-submission` tag exists. Before any v2 work starts, update `CLAUDE.md` and the decisions log (section 4) so they match the decisions below.
+
+### 20.1 Features
+
+| ID | Feature | What it is | Needs before building |
+|---|---|---|---|
+| F1 | Antenatal visit and due-date tracker | Woman enters last period date or due date. App shows the due date and the next visit window and a visit checklist. | Visit schedule read by a human from the raw MCP card PDF (S-MCP). Do not write a schedule from memory. Due date method (for example 280 days from last period) stated on screen and confirmed by a clinician. |
+| F2 | Vaccine and check-up schedule for mother and baby | Dated list from the delivery date or birth date. | Official MoHFW immunisation schedule document, cited per row. Clinician review. |
+| F3 | Government scheme help | Plain-words pages for JSSK, JSY and PMMVY: who gets what, which papers to carry, where to ask. | Current official scheme documents. JSSK text already exists in `config.json` (confirm locally). PMMVY and JSY eligibility and amounts change, so each claim needs a source and a "last checked" date. |
+| F4 | Nearest facility finder | List of facilities by district with a phone number and services. | A verified dataset with a licence that allows reuse. Candidate to check: the ABDM Health Facility Registry (unverified, confirm access and terms). Never invent facilities or numbers. Every row shows its source date. |
+| F5 | Voice-first navigation and more languages | Spoken prompts on every screen, big-button navigation, then more languages. | Section 20.3. |
+| F6 | Family sharing | Husband or mother-in-law receives the plan and the slip. | Section 20.2. |
+| F7 | Daily log and guidance (from the product discussion) | Short daily check-in, a private timeline, and rule-based "no concern flagged / tell your ASHA this week / go today" guidance. | Clinician-reviewed rules. A storage decision (D-17). Never says "normal" or "fine". |
+| F8 | Reminders | Daily or visit reminders. | A channel decision (D-18). Do not claim reminders work until one channel is wired up. |
+
+Suggested order: F1, F2, F3 (content pages, no backend), then F6 (share without a server), F5 (voice and languages), F7, F8, F4.
+
+### 20.2 Family sharing without a server
+
+Default design: the share button creates a link whose data sits after the `#` (never sent to any server), plus the existing slip image through the phone's share sheet. The link carries only stage, tier, signs and time, the same fields as the slip. No names, no phone numbers. Show a clear line saying anyone with the link can read it. A server-backed share (expiring links, live updates) is allowed only after D-17 is decided.
+
+### 20.3 Languages and voice
+
+Principle: a language ships only when (1) every string exists, (2) a native speaker of that language has reviewed all strings and, for audio, all clips, (3) the script renders with a self-hosted font subset, (4) the audio path works or the app shows the "audio not available" line. Machine translation produces a draft only. Medical text is never shipped on machine output alone.
+
+Options for text-to-speech and translation (checked in Oct 2026 by web search; confirm licences and pricing on the official pages before choosing):
+
+| Option | Use | Notes |
+|---|---|---|
+| Sarvam Bulbul | TTS, 11 languages | Paid. About INR 30 per 10,000 characters with a free trial credit. Request limit 2,500 characters. Needs an API key at generation time only. |
+| Bhashini (government platform) | TTS, translation, speech recognition | Reported free for developers by third-party sources. Official terms and production limits not confirmed. Check bhashini.gov.in and its developer docs. |
+| AI4Bharat IndicF5 | TTS, open model, 11 languages | Run it yourself, so no per-character fee. Sources disagree on the licence label (MIT versus Apache 2.0 on related models). Read the LICENSE file in the official repository first. Needs a machine to run it. |
+| AI4Bharat Indic Parler-TTS | TTS, open model | Gated access on Hugging Face. Same licence check. |
+| AI4Bharat IndicTrans2 | Translation drafts, 22 languages | Model weights under MIT. Training data carries its own CC terms. Drafts only. |
+| Google Cloud Text-to-Speech, Azure Speech | TTS, commercial | Indian-language voice lists were not confirmed in this search. Check the official voice lists per language. |
+
+The audio script must not depend on one vendor. It builds the manifest first (dry run), then calls a small provider function. Switching provider must change one function only, and generated mp3 files are committed.
+
+Speech recognition (talking to the app) is a separate decision. Chrome's built-in recognition needs a network. The v1 design stays tap-and-listen.
+
+### 20.4 Data and privacy decisions for v2
+
+| ID | Decision | Status |
+|---|---|---|
+| D-15 | v2 starts only after the v1 submission is tagged. | Final |
+| D-16 | All new clinical, schedule and scheme content carries a source and a last-checked date, and is shown to a clinician before release. | Final |
+| D-17 | Storage for the daily log and any sync. Option A: on-device only (IndexedDB), keeps the privacy story, data is lost if the phone is lost. Option B: accounts and a database, adds sync and an ASHA view, and brings consent, encryption, retention and the Digital Personal Data Protection Act 2023 duties. | Open. Needs the team. |
+| D-18 | Reminder channel. Options: downloadable calendar entry (no backend), web push (backend, weak on iPhone unless installed), WhatsApp or SMS provider (backend, consent, cost). | Open. Needs the team. |
+| D-19 | Language order for v2. Hindi and English are done in v1. Candidates by speakers in the high-burden states: Bengali, Marathi, Telugu, Tamil, Gujarati, Kannada, Odia, Malayalam, Punjabi. | Open. Needs the team and native reviewers. |
+| D-20 | Hindi strings reviewed by the project owner (a native speaker). Record the reviewer name in the README credits and in `audio/REVIEW.md`. This is language review, not clinical review, so it does not go in `reviewed_by` on the rules. | Confirm name |
+
+### 20.5 Not in scope even for v2
+
+No diagnosis. No probability scores. No fetal-sex features. No dose or medicine advice. No numeric thresholds shown to the user unless a health worker enters the measurement.
+
+### 20.6 Decisions made on 25 Oct 2026
+
+| ID | Decision | Status |
+|---|---|---|
+| D-17 | Backend and database: Supabase (hosted Postgres with built-in sign-in and row level security). Sign-in: phone number with a one-time code. | Chosen. Needs: a Supabase project created by the owner, a text-message provider connected for the code, and a check of the hosting region and data-residency terms before real users. |
+| D-19 | Third language: Bengali was requested, then deferred until a native reviewer is available. Hindi and English stay the only shipped languages. | Deferred |
+| D-21 | Voice check uses the browser's speech recognition. On Chrome this sends audio to the browser vendor's speech service, so it needs internet and is disclosed on the screen. A server speech-to-text service is a later option, not built. | Built, see 20.8 |
+
+### 20.7 Languages: what the state data suggests
+
+Hindi covers the Hindi-belt states in the burden list (Uttar Pradesh, Bihar, Madhya Pradesh, Rajasthan, Jharkhand, Chhattisgarh). Spoken varieties there (Bhojpuri, Maithili, Awadhi, Marwari and others) are read in Hindi text, but audio in those varieties does not exist. The states in the list that need other languages are Odisha (Odia) and Assam (Assamese). Maharashtra (Marathi) is large by births but the figure was not verified. Bengali was requested and is deferred (D-19). Choose the next language by the state of the first field pilot, not by this list alone. Each language needs its own native review.
+
+### 20.8 Voice check (built)
+
+Route `/speak`, and an "Answer by voice" button on each question.
+- She taps one button, speaks, taps again. The text is matched against word lists in `src/data/voice_keywords.json` (Hindi script, romanised Hindi, English). No AI decides anything. A strong phrase gives yes. A weak phrase gives not sure, which escalates to at least AMBER.
+- Every mention counts and there is no negation handling. She sees the signs found and removes wrong ones. A missed sign is the unsafe error, so the lists lean toward finding signs.
+- One RED answer ends the check at once. The RED screen shows a large call button and reads the result aloud when audio is available.
+- Browsers do not let a web page dial without a tap, so the app cannot place the call by itself. The call link is the largest control on the screen.
+- Translation is not needed for Hindi or English: recognition returns text in the language she spoke and the word lists cover both. Other languages need their own word lists and review.
+- Not tested against real speech. Tests use a mocked recogniser. Test on real phones in noisy rooms before relying on it.
+- Open options, not built: record the audio and send it to a server speech-to-text service for better accuracy and offline-free quality. Candidates checked by search: Sarvam speech-to-text (Saaras v3, 23 languages, about INR 30 per hour of audio, under 30 seconds per request) and Groq-hosted Whisper large-v3 (free tier reported at about 20 requests a minute, no Hindi quality data found; note Groq is not xAI's Grok). Either needs a small server function to hold the key, because a key in the browser can be copied. That is a change to the privacy design (audio leaves the phone to a second company) and needs the team's approval.
+
+### 20.9 Content governance for week-by-week and newborn content
+
+1. Week-by-week content: every statement maps to a row in a content table with source document, edition year and page. The screen shows the citation in a collapsed "Source" section. No generated medical text. Allowed themes: routine body changes, basic diet advice taken from ICMR and MoHFW documents, and the standard danger signs. Source documents to use: MoHFW antenatal care and PMSMA guidance, ICMR dietary guidelines for Indians, WHO antenatal and postnatal care recommendations. A person reads the raw documents. The assistant does not write from memory.
+2. Newborn module: the switch lives in two places, `config.json` `feature_flags.newborn_module` and `questions.json` `modules.newborn.enabled`. Both stay false until a paediatric or neonatal clinician signs off in `docs/CLINICAL_SIGN_OFF.md` against the exact commit of `questions.json`. The newborn questions are lay-language by design and the app contains no numeric thresholds, so the review is of wording, tiers and referral advice against IMNCI and facility-based newborn care guidance, not of breathing-rate or temperature limits.
+3. Postpartum mood: keep the single wellbeing question and the Tele-MANAS card (14416 is confirmed). Do not add the Edinburgh Postnatal Depression Scale until two things are settled. The copyright holder and terms are described inconsistently in the sources found (the Royal College of Psychiatrists in one, the British Journal of Psychiatry in another), so read the current terms from the publisher. And a Hindi version with a published validation study must be found. The publishers say they cannot vouch for unvalidated translations. A literal or machine translation must not be used.
+
+### 20.10 Backend design (Supabase), draft
+
+Not built yet. A draft schema is in `supabase/migrations/0001_init.sql`.
+- Tables: `profiles` (stage, due date, delivery date, language) and `checkins` (date, phase, answers, note, tier, rules version). Each row belongs to one user.
+- Row level security is on for both tables. A signed-in user can read and write only rows where `user_id` equals their own id. The anon key can be public in the app. The service key never goes in the app or in git.
+- The phone number lives only in Supabase's own auth tables, not in ours. Deleting the account deletes all her rows.
+- The danger-sign verdict is still computed on the phone from the same rules. The server stores results. It never decides them.
+- Before real users: legal review under the Digital Personal Data Protection Act 2023 (consent text, retention, deletion, breach plan), confirm the hosting region, a text-message provider with sender registration for India, and a plain explanation to women of what is stored.
+- Offline: the check-in form works without internet and syncs when the phone is online again. The emergency check never needs an account or a network.
