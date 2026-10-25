@@ -35,8 +35,8 @@ export default function Slip() {
     }>
       <div className="slip" ref={node}>
         <BorderBand />
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}><MaitriMark size={40} /><Wordmark compact /></div>
-        <h1 style={{ fontSize: 'var(--step-2)' }}>{t('slip.title')}</h1>
+        <div className="row-brand"><MaitriMark size={40} /><Wordmark compact /></div>
+        <h1>{t('slip.title')}</h1>
         <dl>
           <dt>{t('slip.stage')}</dt><dd>{stageLabel(stage)}</dd>
           <dt>{t('slip.tier')}</dt>

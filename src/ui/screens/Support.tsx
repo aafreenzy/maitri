@@ -14,11 +14,11 @@ export default function Support() {
     <Page actions={<Button variant="ghost" onClick={() => nav(-1)}>{t('common.back')}</Button>}>
       <h1>{t('wellbeing.title')}</h1>
       <div className="card">
-        <p style={{ fontSize: 'var(--step-1)' }}>{t('wellbeing.body')}</p>
+        <p className="lead">{t('wellbeing.body')}</p>
         <Listen clipId="wellbeing_body" text={t('wellbeing.body')} />
       </div>
       {mh && <CallButton numberKey="mental_health" white={false} text={t('wellbeing.call', { number: mh.number })} />}
-      {em && <p className="card" style={{ fontWeight: 700 }}>{t('wellbeing.danger', { number: em.number })}</p>}
+      {em && <p className="card strong">{t('wellbeing.danger', { number: em.number })}</p>}
       {em && <CallButton numberKey="emergency_general" white={false} />}
     </Page>
   );

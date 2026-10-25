@@ -24,9 +24,9 @@ export default function Plan() {
         <section key={i} className={`card step ${done[i] ? 'done' : ''}`} aria-labelledby={`step-${i}`}>
           <span className="num" aria-hidden="true">{i + 1}</span>
           <div className="body">
-            <p id={`step-${i}`} className="step-text" style={{ fontSize: 'var(--step-1)', fontWeight: 600 }}>{text}</p>
+            <p id={`step-${i}`} className="step-text lead">{text}</p>
             {i === 0 && <CallButton numberKey="ambulance_primary" white={false} />}
-            {i === 0 && transport && <CallButton numberKey="transport_pregnant" white={false} text={t('plan.transport_line', { number: transport.number })} />}
+            {i === 0 && transport && <CallButton numberKey="transport_pregnant" outline text={t('plan.transport_line', { number: transport.number })} />}
             {i === 3 && <p className="muted">{entitlement(lang)}</p>}
             <Listen clipId={`plan_step${i + 1}`} text={text} />
             <label className="tick">

@@ -61,7 +61,7 @@ export default function Account() {
     <Page>
       <h1>{t('account.title')}</h1>
       {!sent ? (
-        <form className="rows" style={{ gap: 12 }} onSubmit={(e) => { e.preventDefault(); void run(async () => { await sendCode(phone); setSent(true); }); }}>
+        <form className="stack" onSubmit={(e) => { e.preventDefault(); void run(async () => { await sendCode(phone); setSent(true); }); }}>
           <div className="field">
             <label htmlFor="phone">{t('account.phone_label')}</label>
             <input id="phone" type="tel" inputMode="numeric" autoComplete="tel-national" value={phone} aria-invalid={!!error || undefined} aria-describedby="phone-hint" onChange={(e) => setPhone(e.target.value)} />
@@ -71,7 +71,7 @@ export default function Account() {
           <button type="submit" className="btn primary" disabled={busy}>{t('account.send_code')}</button>
         </form>
       ) : (
-        <form className="rows" style={{ gap: 12 }} onSubmit={(e) => { e.preventDefault(); void run(async () => { await verifyCode(phone, code); nav('/log'); }); }}>
+        <form className="stack" onSubmit={(e) => { e.preventDefault(); void run(async () => { await verifyCode(phone, code); nav('/log'); }); }}>
           <p className="card">{t('account.code_sent', { last4: phone.replace(/\D/g, '').slice(-4) })}</p>
           <div className="field">
             <label htmlFor="code">{t('account.code_label')}</label>

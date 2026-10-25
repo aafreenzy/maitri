@@ -56,7 +56,7 @@ export default function Result() {
       <main className="page-body">
         <SignalShape className="stamp" tier={r.tier} word={t(`tier.${r.tier}`)} />
         <h1 className="verdict" aria-live="polite">{title}</h1>
-        {body && <p style={{ fontSize: 'var(--step-1)', fontWeight: 600 }}>{body}</p>}
+        {body && <p className="lead">{body}</p>}
         {r.tier !== 'GREEN' && r.headlineReason && <p>{t('result.because', { signs: r.reasons.join(', ') })}</p>}
         {r.hasNotSure && <p className="wall-note">{t('result.not_sure_note')}</p>}
         {r.hasWellbeingFlag && <Link className="wall-note link" to="/support">{t('wellbeing.title')}. {t('result.wellbeing_card')}</Link>}

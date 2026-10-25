@@ -23,7 +23,7 @@ export function SaveToLog() {
     } catch { setStatus('error'); }
   };
   return (
-    <div className="rows" style={{ gap: 8 }}>
+    <div className="stack">
       <Button className="ghosted" loading={status === 'saving'} disabled={status === 'saved'} onClick={save}>
         {status === 'saving' ? t('log.saving') : t('log.save')}
       </Button>
