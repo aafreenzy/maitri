@@ -7,6 +7,7 @@
     "dev": "vite",
     "prebuild": "npm run test:report",
     "build": "tsc --noEmit && vite build",
+    "postbuild": "node scripts/make-sw.mjs",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
