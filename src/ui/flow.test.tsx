@@ -4,11 +4,12 @@ import { MemoryRouter } from 'react-router-dom';
 import { afterEach } from 'vitest';
 import { AppRoutes } from '../routes';
 import { setLang } from '../lib/i18n';
+import { AuthProvider } from '../state/auth';
 import { SessionProvider } from '../state/session';
 import { buildExport } from './screens/RuleReview';
 import { slipToBlob } from '../lib/slip';
 
-const app = (path: string) => render(<SessionProvider><MemoryRouter initialEntries={[path]}><AppRoutes /></MemoryRouter></SessionProvider>);
+const app = (path: string) => render(<AuthProvider><SessionProvider><MemoryRouter initialEntries={[path]}><AppRoutes /></MemoryRouter></SessionProvider></AuthProvider>);
 afterEach(() => { setLang('hi'); sessionStorage.clear(); });
 
 async function startCheck(user: ReturnType<typeof userEvent.setup>, lang: 'English' | 'हिन्दी', mode: RegExp, stage: RegExp) {
@@ -24,6 +25,13 @@ describe('guards', () => {
       expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/भाषा|language/i);
       unmount();
     }
+  });
+});
+
+describe('accounts are hidden when the backend is not configured', () => {
+  it('shows no daily log link on the first screen', () => {
+    app('/');
+    expect(screen.queryByText('मेरी रोज़ की डायरी')).toBeNull();
   });
 });
 

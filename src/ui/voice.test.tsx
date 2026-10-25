@@ -4,6 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AppRoutes } from '../routes';
 import { setLang } from '../lib/i18n';
+import { AuthProvider } from '../state/auth';
 import { SessionProvider } from '../state/session';
 
 type Handlers = { onresult?: (e: unknown) => void; onerror?: (e: { error: string }) => void; onend?: () => void };
@@ -20,7 +21,7 @@ class FakeRec {
 }
 const say = (text: string) => handlers.onresult?.({ resultIndex: 0, results: [Object.assign([{ transcript: text }], { isFinal: true })] });
 
-const app = (path: string) => render(<SessionProvider><MemoryRouter initialEntries={[path]}><AppRoutes /></MemoryRouter></SessionProvider>);
+const app = (path: string) => render(<AuthProvider><SessionProvider><MemoryRouter initialEntries={[path]}><AppRoutes /></MemoryRouter></SessionProvider></AuthProvider>);
 
 beforeEach(() => { handlers = {}; setLang('en'); (window as unknown as Record<string, unknown>).SpeechRecognition = FakeRec; });
 afterEach(() => { delete (window as unknown as Record<string, unknown>).SpeechRecognition; sessionStorage.clear(); setLang('hi'); });
