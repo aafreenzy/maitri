@@ -24,6 +24,7 @@ export default function Speak() {
   const [transcript, setTranscript] = useState('');
   const [stage, setStage] = useState<StageId | null>(null);
   const [removed, setRemoved] = useState<Record<string, boolean>>({});
+  const [changingStage, setChangingStage] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const listener = useRef<Listener | null>(null);
   const supported = recognitionSupported();
@@ -41,7 +42,7 @@ export default function Speak() {
     l.result.then(
       (text) => {
         if (!text.trim()) { setError(t('voice.nothing')); setPhase('idle'); return; }
-        setTranscript(text); setStage(null); setPhase('review');
+        setTranscript(text); setStage(null); setChangingStage(false); setPhase('review');
       },
       (e: unknown) => {
         const code = e instanceof SpeechError ? e.code : 'other';
@@ -100,17 +101,24 @@ export default function Speak() {
             <b>{t('voice.heard')}</b>
             <p>{transcript}</p>
           </section>
-          {!effectiveStage && (
+          {effectiveStage && !changingStage && (
+            <div className="card row-card">
+              <Pictogram id={data.stages.find((x) => x.id === effectiveStage)?.icon ?? 'tier-unknown'} size={48} />
+              <span className="grow strong">{stageLabel(data.stages.find((x) => x.id === effectiveStage)!)}</span>
+              <Button className="small" onClick={() => setChangingStage(true)}>{t('common.change')}</Button>
+            </div>
+          )}
+          {(!effectiveStage || changingStage) && (
             <>
               <h2>{t('stage.title')}</h2>
               {data.stages.map((s) => (
-                <button key={s.id} type="button" className="card tap" onClick={() => setStage(s.id)}>
+                <button key={s.id} type="button" className="card tap" onClick={() => { setStage(s.id); setChangingStage(false); }}>
                   <Pictogram id={s.icon} size={56} /><span>{stageLabel(s)}</span>
                 </button>
               ))}
             </>
           )}
-          {effectiveStage && (
+          {effectiveStage && !changingStage && (
             <section className="stack">
               <h2>{signs.length ? t('voice.signs_title') : t('voice.no_signs')}</h2>
               {signs.map(([id, v]) => {
