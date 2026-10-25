@@ -159,6 +159,7 @@ describe('daily log', () => {
     app('/account');
     await user.click(await screen.findByRole('button', { name: 'Delete my account and log' }));
     await user.click(screen.getByRole('button', { name: 'Yes, delete everything' }));
-    expect(await screen.findByRole('heading', { level: 1 })).toHaveTextContent(/language/i);
+    // After deleting the account she is signed out, so the optional welcome screen shows again.
+    expect(await screen.findByRole('button', { name: /Continue without signing in/ })).toBeInTheDocument();
   });
 });

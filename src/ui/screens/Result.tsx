@@ -12,6 +12,7 @@ import { Header } from '../components/Layout';
 import { Listen } from '../components/Listen';
 import { Glyph } from '../icons/Glyph';
 import { SaveToLog } from '../components/SaveToLog';
+import { WhyResult } from '../components/WhyResult';
 import { SignalShape } from '../components/SignalShape';
 
 export default function Result() {
@@ -60,6 +61,7 @@ export default function Result() {
         {r.tier !== 'GREEN' && r.headlineReason && <p>{t('result.because', { signs: r.reasons.join(', ') })}</p>}
         {r.hasNotSure && <p className="wall-note">{t('result.not_sure_note')}</p>}
         {r.hasWellbeingFlag && <Link className="wall-note link" to="/support">{t('wellbeing.title')}. {t('result.wellbeing_card')}</Link>}
+        <WhyResult />
         <SaveToLog />
         <Listen clipId={clip} text={`${title}. ${body}`} />
         <p className="small">{t('result.disclaimer_short')}</p>

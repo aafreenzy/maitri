@@ -6,7 +6,7 @@ Built for recHERsion 2026, Problem Statement 1 (Women's Healthcare).
 
 > Education tool. It does not diagnose and cannot replace a health worker. The rules are a draft and have not been reviewed by a doctor. See "Honest limitations".
 
-## What it does
+## What it does :- 
 
 - **Check by tapping or by voice.** One question per screen with a picture, big Yes / No / Not sure buttons with tick and cross symbols, and Listen and Slow buttons. Or tap the microphone and say what is happening.
 - **Three result levels with word, shape and colour together:** RED octagon (go to the hospital now), AMBER triangle (see the ANM, ASHA or doctor today), GREEN circle ("No danger sign told", never "fine" or "safe"). A greyscale screenshot still reads.
@@ -20,6 +20,23 @@ Built for recHERsion 2026, Problem Statement 1 (Women's Healthcare).
 - **Rule review page** for a clinician to mark rules reviewed and export an updated `rules.json`.
 
 Optional, off until configured: phone sign-in and a daily log (see "Backend").
+
+## Try it
+
+- **Live app:** https://aafreenzy.github.io/maitri/ (published by the GitHub Pages workflow after the repository owner turns Pages on under Settings, Pages, Source: GitHub Actions). If that address does not load yet, run it locally (below) or watch the video.
+- **Demo video (about 30 seconds):** [`docs/demo/maitri-demo.mp4`](docs/demo/maitri-demo.mp4). Its voice segment uses a simulated speech recogniser, as the video says.
+- **Presentation:** `docs/Maitri-recHERsion-2026-final.pptx`. **Pitch and full explanation:** `docs/PITCH_AND_EXPLANATION.md`.
+
+![The Maitri check: first screen with the emergency call, a question, the RED result, why this result, the go-now plan](docs/images/tour.png)
+
+**A two-minute tour for judges**
+
+1. First screen: the emergency call button is the first thing on screen. Pick Hindi or English.
+2. Tap "Speak instead of tapping", then the big microphone. Say that the baby is born and there is heavy bleeding. (Needs a phone browser with speech recognition and internet.) Or choose family, "I had my baby", and answer Yes to heavy bleeding.
+3. One RED sign ends the check: the large call button, the go-now plan and the slip.
+4. Tap "Why this result?" to see the rule, its source and that no AI decides.
+5. Open About, then "How Maitri decides" for sources, tests, review status, helpline status, data handling and what is simulated or not done.
+6. Try Not sure on a question: the result goes up to AMBER, never GREEN.
 
 ## Run it
 
@@ -65,11 +82,16 @@ docs            spec, build plan, design brief, pitch facts, sign-off log
 
 ## Backend (optional)
 
-Google sign-in, phone-code sign-in and a daily log are built behind two settings, `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (see `.env.example`). With them unset the app shows no account features and makes no backend request. The schema is in `supabase/migrations/0001_init.sql` with row level security. Setup steps are in `docs/BACKEND_SETUP.md`, and `npm run check:backend` verifies a project once it exists. Until a real project is connected and checked, treat this part as tested only against a simulated client. Never put the service role key in this repository.
+Google sign-in, phone-code sign-in and a daily log are built behind two settings, `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (see `.env.example`). With them unset the app shows no account features and makes no backend request. The schema is in `supabase/migrations/0001_init.sql` with row level security. A plain-language explanation is in `docs/DATABASE_EXPLAINED.md` and setup steps are in `docs/BACKEND_SETUP.md`, and `npm run check:backend` verifies a project once it exists. Until a real project is connected and checked, treat this part as tested only against a simulated client. Never put the service role key in this repository.
 
 ## Deploy
 
-`vercel.json` is included. Import the repository in Vercel, build command `npm run build`, output `dist`. The headers allow the microphone for the voice check and nothing else. Live URL: _to be added after deploy_.
+Two ready-made options:
+
+- **GitHub Pages (workflow included):** `.github/workflows/pages.yml` builds and publishes on every push to `main`. One-time step for the owner: Settings, Pages, Source: GitHub Actions. The address is `https://<owner>.github.io/<repo>/`. To turn on accounts, add the repository variables `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` (public values only).
+- **Vercel:** `vercel.json` is included. Import the repository, build command `npm run build`, output `dist`. The headers allow the microphone for the voice check and nothing else.
+
+Deadline guard: run `sh scripts/setup.sh` once in your clone. It refuses commits after the hard stop. It cannot stop edits made on github.com in the browser.
 
 ## Honest limitations
 

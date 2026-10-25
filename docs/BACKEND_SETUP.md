@@ -1,5 +1,7 @@
 # Backend setup (Supabase, Google sign-in)
 
+For a plain-language overview of what the database stores and why it is private, read `docs/DATABASE_EXPLAINED.md` first.
+
 You create the project and the Google client. Menu names in the dashboards change now and then, so follow the idea if a label differs.
 
 ## What stays secret and what is safe
