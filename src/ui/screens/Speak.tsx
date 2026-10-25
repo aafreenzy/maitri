@@ -89,9 +89,7 @@ export default function Speak() {
             <Glyph name={phase === 'listening' ? 'stop' : 'mic'} size={64} />
             <span>{phase === 'listening' ? t('voice.stop') : t('voice.start')}</span>
           </button>
-          <p role="status" className="card" style={{ minHeight: 64 }}>
-            {phase === 'listening' ? (interim || t('voice.listening')) : ''}
-          </p>
+          {phase === 'listening' && <p role="status" className="card lead">{interim || t('voice.listening')}</p>}
           <p className="muted small">{t('voice.privacy')}</p>
         </>
       )}
@@ -113,14 +111,14 @@ export default function Speak() {
             </>
           )}
           {effectiveStage && (
-            <section className="rows" style={{ gap: 12 }}>
+            <section className="stack">
               <h2>{signs.length ? t('voice.signs_title') : t('voice.no_signs')}</h2>
               {signs.map(([id, v]) => {
                 const q = data.questions.find((x) => x.id === id);
                 return (
-                  <div key={id} className="card" style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                  <div key={id} className="card row-card">
                     <Pictogram id={q?.icon ?? 'tier-unknown'} size={48} />
-                    <span style={{ flex: 1, fontWeight: 700 }}>{label(id)}</span>
+                    <span className="grow strong">{label(id)}</span>
                     <Glyph name={v === 'yes' ? 'tick' : 'question'} size={28} />
                     <Button className="small" onClick={() => setRemoved({ ...removed, [id]: true })}>{t('common.remove')}</Button>
                   </div>

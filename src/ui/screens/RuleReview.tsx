@@ -37,7 +37,7 @@ export default function RuleReview() {
       <p className="hint">{t('review.note')}</p>
       {error && <p className="error-box" role="alert">{error}</p>}
       {stages.map((st) => (
-        <section key={st} className="rows" style={{ gap: 12 }}>
+        <section key={st} className="stack">
           <h2>{data.stages.find((s) => s.id === st)![getLang() === 'hi' ? 'hi' : 'en']}</h2>
           {data.rules.filter((r) => r.stages.includes(st)).map((r) => {
             const qids = [r.question_id, ...(r.question_ids ?? []), ...(r.among ?? [])].filter(Boolean) as string[];

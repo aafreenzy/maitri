@@ -28,9 +28,9 @@ export default function AshaList() {
       {rows.map((c) => {
         const stage = data.stages.find((s) => s.id === c.stage);
         return (
-          <div key={c.id} className="card" style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-            <div style={{ width: 72 }}><SignalShape tier={c.tier} word={t(`tier.${c.tier}`)} size={72} /></div>
-            <div style={{ flex: 1 }}>
+          <div key={c.id} className="card row-card">
+            <div className="thumb"><SignalShape tier={c.tier} word={t(`tier.${c.tier}`)} size={72} /></div>
+            <div className="grow">
               <b>{stage ? stageLabel(stage) : c.stage}</b>
               <div className="muted small">{new Date(c.ts).toLocaleTimeString(lang === 'hi' ? 'hi-IN' : 'en-IN', { timeStyle: 'short' })} · {t('asha.signs_count', { count: c.yes_count })}</div>
             </div>

@@ -29,7 +29,7 @@ export function Listen({ clipId, text }: { clipId: string; text?: string }) {
         </Button>
         <Button onClick={() => run(0.8)}>{t('common.slow')}</Button>
       </div>
-      {missing && <p className="hint" role="status" style={{ marginTop: 8 }}>{t('common.audio_missing')}</p>}
+      {missing && <p className="hint" role="status">{t('common.audio_missing')}</p>}
     </div>
   );
 }

@@ -46,9 +46,9 @@ export default function Log() {
       {!failed && rows === null && <p role="status">{t('common.loading')}</p>}
       {rows && rows.length === 0 && <p className="card" role="status">{t('log.empty')}</p>}
       {rows?.map((c) => (
-        <div key={c.id} className="card" style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
-          {c.tier && <div style={{ width: 64 }}><SignalShape tier={c.tier} word={t(`tier.${c.tier}`)} size={64} /></div>}
-          <div style={{ flex: 1 }}>
+        <div key={c.id} className="card row-card">
+          {c.tier && <div className="thumb"><SignalShape tier={c.tier} word={t(`tier.${c.tier}`)} size={64} /></div>}
+          <div className="grow">
             <b>{fmt(c.entry_date)}</b>
             <div className="muted small">{t(`log.phase.${c.phase}`)} · {t('log.signs', { count: Object.values(c.answers).filter((a) => a === 'yes').length })}</div>
           </div>
