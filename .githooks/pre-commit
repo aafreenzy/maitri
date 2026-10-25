@@ -1,0 +1,11 @@
+#!/bin/sh
+# Deadline guard. Refuses a commit made after the hard stop in src/data/config.json.
+# For testing, set MAITRI_FAKE_NOW to an ISO time. Turn the hook on with: sh scripts/setup.sh
+node -e '
+const c = require("./src/data/config.json").deadline_guard;
+const now = process.env.MAITRI_FAKE_NOW ? new Date(process.env.MAITRI_FAKE_NOW) : new Date();
+if (now > new Date(c.hard_stop_iso)) {
+  console.error("\nCOMMIT REFUSED: it is after the hard stop (" + c.hard_stop_iso + ").");
+  console.error("Any commit after the official deadline (" + c.official_deadline_iso + ") disqualifies the team.\n");
+  process.exit(1);
+}'

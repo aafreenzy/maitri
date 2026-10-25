@@ -227,5 +227,11 @@
   "slip.consent_no": "Not now",
   "slip.share_text": "Share as text",
   "slip.copied": "Copied. Paste it into a message.",
-  "slip.text_error": "Could not share the text. Use Print this slip instead."
+  "slip.text_error": "Could not share the text. Use Print this slip instead.",
+  "home.emergency": "Emergency? Call {number} now",
+  "result.why": "Why this result?",
+  "result.why_body": "Maitri uses a fixed list of rules. No AI decides this. Each item below is a rule that applied to your answers.",
+  "result.why_not_sure": "You were not sure about this",
+  "result.why_rules_version": "Rule list version {version}. Not yet reviewed by a clinician.",
+  "result.why_none": "None of the rules applied to your answers."
 }
