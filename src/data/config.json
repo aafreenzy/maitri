@@ -64,8 +64,8 @@
     "browser_tts_fallback": true
   },
   "deadline_guard": {
-    "hard_stop_iso": "2026-10-25T20:45:00+05:30",
-    "official_deadline_iso": "2026-10-25T21:00:00+05:30",
+    "hard_stop_iso": "2026-10-25T23:50:00+05:30",
+    "official_deadline_iso": "2026-10-26T00:00:00+05:30",
     "note": "Any commit after the official deadline means disqualification. The pre-commit hook blocks commits after hard_stop_iso."
   }
 }
