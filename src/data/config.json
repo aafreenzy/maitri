@@ -1,0 +1,71 @@
+{
+  "app": {
+    "name": "Maitri",
+    "name_hi": "मैत्री",
+    "version": "0.1.0",
+    "tagline_en": "A friend who tells the family what to do now",
+    "tagline_hi": "वह सहेली जो परिवार को बताए कि अभी क्या करना है",
+    "region_default": "MP",
+    "postpartum_days": 42
+  },
+  "numbers": {
+    "ambulance_primary": {
+      "number": "108",
+      "label_en": "Emergency ambulance",
+      "label_hi": "आपातकालीन एम्बुलेंस",
+      "status": "user_supplied_unverified",
+      "note": "Supplied by the team for Madhya Pradesh from directory pages (india.gov.in, bhopal.nic.in). Confirm with the state NHM page before the demo."
+    },
+    "transport_pregnant": {
+      "number": "102",
+      "label_en": "Free ambulance for pregnant women and babies (Janani Express)",
+      "label_hi": "गर्भवती महिलाओं और शिशुओं के लिए निःशुल्क एम्बुलेंस (जननी एक्सप्रेस)",
+      "status": "user_supplied_unverified",
+      "note": "Confirm service name and coverage in the demo state."
+    },
+    "emergency_general": {
+      "number": "112",
+      "label_en": "Emergency helpline (police, fire, health)",
+      "label_hi": "आपातकालीन हेल्पलाइन (पुलिस, दमकल, स्वास्थ्य)",
+      "status": "user_supplied_unverified"
+    },
+    "health_advice": {
+      "number": "104",
+      "label_en": "Health advice helpline (state-run, may vary)",
+      "label_hi": "स्वास्थ्य सलाह हेल्पलाइन (राज्य द्वारा संचालित)",
+      "status": "user_supplied_unverified",
+      "note": "HBNC leaflet says 'Dial 104'. Service varies by state."
+    },
+    "mental_health": {
+      "number": "14416",
+      "label_en": "Tele-MANAS mental health support, free, 24 hours",
+      "label_hi": "टेली-मानस मानसिक स्वास्थ्य सहायता, निःशुल्क, 24 घंटे",
+      "status": "confirmed_pib",
+      "source": "https://pib.gov.in/PressReleasePage.aspx?PRID=2022796"
+    }
+  },
+  "excluded_numbers": {
+    "181": "Not used. The description supplied for 181 (CM Helpline / Janani Suraksha queries) is inconsistent with a maternal helpline. Add only after the state NHM page confirms what it does."
+  },
+  "ui_number_policy": "The call button reads numbers.ambulance_primary.number from this file. Never hard-code a number in components. The Trust page lists every number with its status.",
+  "entitlements": {
+    "jssk_en": "Under the Janani Shishu Suraksha Karyakram (JSSK), government hospitals provide free delivery, medicines, tests, food and transport between home and hospital. Ask the ambulance team or the hospital.",
+    "jssk_hi": "जननी शिशु सुरक्षा कार्यक्रम (JSSK) के तहत सरकारी अस्पताल में प्रसव, दवाएँ, जाँच, भोजन और घर से अस्पताल तक का परिवहन निःशुल्क मिलता है। एम्बुलेंस टीम या अस्पताल से पूछिए।",
+    "status": "document_read_confirm_locally",
+    "source": "https://nhm.gov.in/New_Updates_2018/NHM_Components/RMNCHA/MH/Guidelines/JSSK_Final_English.pdf"
+  },
+  "feature_flags": {
+    "newborn_module": false,
+    "asha_list": true,
+    "qr_slip": false,
+    "qr_scan": false,
+    "rule_review_page": true,
+    "audio": true,
+    "browser_tts_fallback": true
+  },
+  "deadline_guard": {
+    "hard_stop_iso": "2026-10-25T20:45:00+05:30",
+    "official_deadline_iso": "2026-10-25T21:00:00+05:30",
+    "note": "Any commit after the official deadline means disqualification. The pre-commit hook blocks commits after hard_stop_iso."
+  }
+}

@@ -1,0 +1,13 @@
+:root {
+  --chuna: #E6EEF6; --paper: #FFFFFF; --nil: #23358A; --ink: #111B38; --muted: #4A5878;
+  --sindoor: #C4122F; --haldi: #F7B500; --calm: #0F7A6B;
+  --outline: 2.5px solid var(--ink);
+  --r-button: 14px; --r-sheet: 28px; --r-chip: 999px;
+  --font-display: 'Yatra One', 'Noto Sans Devanagari', system-ui, sans-serif;
+  --font-body: 'Mukta', 'Noto Sans Devanagari', system-ui, sans-serif;
+  --step--1: 0.85rem; --step-0: 1rem; --step-1: 1.2rem; --step-2: 1.5rem; --step-3: 2.1rem; --step-4: 2.8rem;
+  --tap-min: 56px; --tap-main: 64px; --gutter: 16px;
+}
+html { font-size: 19px; }
+html[lang="hi"] body { line-height: 1.55; }
+html[lang="en"] body { line-height: 1.4; }
