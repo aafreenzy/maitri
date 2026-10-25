@@ -132,3 +132,4 @@ html, body, #root { height: 100%; }
 .row-brand { display: flex; align-items: center; gap: 12px; }
 .thumb { width: 64px; flex: none; }
 .tick .muted { font-weight: 400; }
+.centered { text-align: center; }
