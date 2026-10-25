@@ -7,7 +7,7 @@ import { Page } from './ui/components/Layout';
 import About from './ui/screens/About';
 import Account from './ui/screens/Account';
 import Log from './ui/screens/Log';
-import Language from './ui/screens/Language';
+import Start from './ui/screens/Start';
 import Mode from './ui/screens/Mode';
 import Plan from './ui/screens/Plan';
 import Question from './ui/screens/Question';
@@ -34,7 +34,7 @@ export function AppRoutes() {
   return (
     <Suspense fallback={<p className="page-body" role="status">{t('common.loading')}</p>}>
       <Routes>
-        <Route path="/" element={<Language />} />
+        <Route path="/" element={<Start />} />
         <Route path="/mode" element={<Mode />} />
         <Route path="/stage" element={<Stage />} />
         <Route path="/speak" element={<Speak />} />
