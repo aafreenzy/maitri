@@ -1,0 +1,178 @@
+{
+  "version": "0.1-draft",
+  "status": "DRAFT. Hindi text needs review by a native Hindi speaker and an ASHA, ANM or doctor before real use.",
+  "modules": {
+    "core": { "enabled": true },
+    "newborn": { "enabled": false }
+  },
+  "stages": [
+    {
+      "id": "pregnant", "icon": "stage-pregnant", "audio_id": "stage_pregnant",
+      "en": "I am pregnant", "hi": "मैं गर्भवती हूँ"
+    },
+    {
+      "id": "labour", "icon": "stage-labour", "audio_id": "stage_labour",
+      "en": "Labour pains have started", "hi": "प्रसव का दर्द शुरू हो गया है"
+    },
+    {
+      "id": "after_birth", "icon": "stage-after-birth", "audio_id": "stage_after_birth",
+      "en": "I had my baby (up to 42 days)", "hi": "बच्चा हो चुका है (42 दिन तक)"
+    }
+  ],
+  "questions": [
+    {
+      "id": "q_fits", "module": "core", "order": 10, "icon": "fits",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "en": "Fits (shaking), fainting, or not waking up?",
+      "hi": "दौरे (झटके) पड़ना, बेहोश होना, या जगाने पर भी न उठना?",
+      "short_en": "fits or fainting", "short_hi": "दौरे या बेहोशी"
+    },
+    {
+      "id": "q_bleed_preg", "module": "core", "order": 20, "icon": "bleeding",
+      "stages": ["pregnant", "labour"],
+      "en": "Bleeding from the vagina now?",
+      "hi": "अभी योनि से खून आ रहा है?",
+      "short_en": "bleeding", "short_hi": "खून आना"
+    },
+    {
+      "id": "q_bleed_pp", "module": "core", "order": 20, "icon": "bleeding-cloth",
+      "stages": ["after_birth"],
+      "en": "Heavy bleeding after birth. A cloth soaks in minutes, or the bleeding does not stop?",
+      "hi": "बच्चे के जन्म के बाद बहुत ज़्यादा खून। कपड़ा कुछ ही मिनट में भीग जाए, या खून रुके ही नहीं?",
+      "short_en": "heavy bleeding", "short_hi": "बहुत ज़्यादा खून"
+    },
+    {
+      "id": "q_headache_vision", "module": "core", "order": 30, "icon": "head-eye",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "en": "Very bad headache, or blurred vision?",
+      "hi": "बहुत तेज़ सिरदर्द, या आँखों के आगे धुंधला दिखना?",
+      "short_en": "bad headache or blurred vision", "short_hi": "तेज़ सिरदर्द या धुंधला दिखना"
+    },
+    {
+      "id": "q_swelling", "module": "core", "order": 40, "icon": "swelling",
+      "stages": ["pregnant", "labour"],
+      "en": "Swelling of the face, hands or whole body (not just the feet)?",
+      "hi": "चेहरे, हाथों या पूरे शरीर में सूजन (सिर्फ़ पैरों में नहीं)?",
+      "short_en": "swelling of face, hands or body", "short_hi": "चेहरे, हाथों या शरीर में सूजन"
+    },
+    {
+      "id": "q_fever", "module": "core", "order": 50, "icon": "fever",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "en": "High fever (body very hot)?",
+      "hi": "तेज़ बुखार (शरीर बहुत गरम)?",
+      "short_en": "high fever", "short_hi": "तेज़ बुखार"
+    },
+    {
+      "id": "q_discharge", "module": "core", "order": 60, "icon": "discharge",
+      "stages": ["after_birth"],
+      "en": "Bad-smelling discharge from the vagina?",
+      "hi": "योनि से बदबूदार स्राव?",
+      "short_en": "bad-smelling discharge", "short_hi": "बदबूदार स्राव"
+    },
+    {
+      "id": "q_water_leak", "module": "core", "order": 70, "icon": "water-leak",
+      "stages": ["pregnant", "labour"],
+      "en": "Water bag burst, or water leaking, without labour pains?",
+      "hi": "प्रसव-दर्द शुरू हुए बिना पानी की थैली फटना या पानी बहना?",
+      "short_en": "water leaking before labour pains", "short_hi": "दर्द से पहले पानी बहना"
+    },
+    {
+      "id": "q_pale_breathless", "module": "core", "order": 80, "icon": "pale-weak",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "en": "Very pale and weak, or short of breath?",
+      "hi": "बहुत पीलापन और कमज़ोरी, या साँस फूलना?",
+      "short_en": "very pale and weak, or short of breath", "short_hi": "बहुत पीलापन, कमज़ोरी या साँस फूलना"
+    },
+    {
+      "id": "q_hard_breath", "module": "core", "order": 90, "icon": "breathing",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "en": "Great difficulty breathing?",
+      "hi": "साँस लेने में बहुत कठिनाई?",
+      "short_en": "difficulty breathing", "short_hi": "साँस लेने में कठिनाई"
+    },
+    {
+      "id": "q_belly_pain", "module": "core", "order": 100, "icon": "belly-pain",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "en": "Very bad belly pain?",
+      "hi": "पेट में बहुत तेज़ दर्द?",
+      "short_en": "very bad belly pain", "short_hi": "पेट में बहुत तेज़ दर्द"
+    },
+    {
+      "id": "q_baby_moves", "module": "core", "order": 110, "icon": "baby-moves",
+      "stages": ["pregnant", "labour"],
+      "en": "Baby moving much less than usual, or not at all?",
+      "hi": "पेट में बच्चा रोज़ से बहुत कम हिल रहा है, या बिल्कुल नहीं हिल रहा?",
+      "short_en": "baby moving much less", "short_hi": "बच्चा बहुत कम हिल रहा है"
+    },
+    {
+      "id": "q_leg_pain", "module": "core", "order": 120, "icon": "calf-pain",
+      "stages": ["after_birth"],
+      "en": "Pain or swelling in one calf?",
+      "hi": "एक पैर की पिंडली में दर्द या सूजन?",
+      "short_en": "pain or swelling in one calf", "short_hi": "एक पिंडली में दर्द या सूजन"
+    },
+    {
+      "id": "q_confused", "module": "core", "order": 130, "icon": "confused",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "en": "Confused, or talking strangely?",
+      "hi": "उलझन में होना, या अजीब तरह से बोलना?",
+      "short_en": "confusion or strange talk", "short_hi": "उलझन या अजीब बातें"
+    },
+    {
+      "id": "q_long_labour", "module": "core", "order": 140, "icon": "clock-12",
+      "stages": ["labour"],
+      "en": "Labour pains for more than 12 hours?",
+      "hi": "प्रसव का दर्द 12 घंटे से ज़्यादा हो गया?",
+      "short_en": "labour pains for over 12 hours", "short_hi": "12 घंटे से ज़्यादा प्रसव-दर्द"
+    },
+    {
+      "id": "q_wellbeing", "module": "core", "order": 150, "icon": "heavy-heart",
+      "stages": ["after_birth"],
+      "en": "Feeling very sad or hopeless, or thoughts of harming self or the baby?",
+      "hi": "बहुत उदास या निराश महसूस करना, या खुद को या बच्चे को नुकसान पहुँचाने का ख़्याल?",
+      "short_en": "feeling very sad or hopeless", "short_hi": "बहुत उदासी या निराशा"
+    },
+    {
+      "id": "n_feed", "module": "newborn", "order": 210, "icon": "baby-feed",
+      "stages": ["after_birth"],
+      "en": "Baby not feeding, or sucking very weakly?",
+      "hi": "बच्चा दूध नहीं पी रहा, या बहुत कमज़ोर चूस रहा है?",
+      "short_en": "baby not feeding well", "short_hi": "बच्चा दूध नहीं पी रहा"
+    },
+    {
+      "id": "n_breath", "module": "newborn", "order": 220, "icon": "baby-breath",
+      "stages": ["after_birth"],
+      "en": "Baby breathing fast, or the chest pulling in with each breath?",
+      "hi": "बच्चा तेज़ साँस ले रहा है, या हर साँस पर छाती अंदर धँस रही है?",
+      "short_en": "baby breathing fast", "short_hi": "बच्चा तेज़ साँस ले रहा है"
+    },
+    {
+      "id": "n_temp", "module": "newborn", "order": 230, "icon": "baby-temp",
+      "stages": ["after_birth"],
+      "en": "Baby very hot, or cold to the touch?",
+      "hi": "बच्चा बहुत गरम है, या छूने पर ठंडा है?",
+      "short_en": "baby very hot or cold", "short_hi": "बच्चा बहुत गरम या ठंडा"
+    },
+    {
+      "id": "n_fit", "module": "newborn", "order": 240, "icon": "baby-fit",
+      "stages": ["after_birth"],
+      "en": "Baby having fits, or very sleepy and limp?",
+      "hi": "बच्चे को दौरे पड़ रहे हैं, या वह बहुत सुस्त और ढीला है?",
+      "short_en": "baby fits or very limp", "short_hi": "बच्चे को दौरे या बहुत सुस्ती"
+    },
+    {
+      "id": "n_yellow", "module": "newborn", "order": 250, "icon": "baby-yellow",
+      "stages": ["after_birth"],
+      "en": "Baby's palms and soles yellow, or yellow skin on the first day?",
+      "hi": "बच्चे की हथेलियाँ और तलवे पीले हैं, या पहले ही दिन त्वचा पीली हो गई?",
+      "short_en": "baby yellow palms and soles", "short_hi": "बच्चे की हथेली-तलवे पीले"
+    },
+    {
+      "id": "n_cord", "module": "newborn", "order": 260, "icon": "baby-cord",
+      "stages": ["after_birth"],
+      "en": "Pus, redness or swelling at the baby's cord stump?",
+      "hi": "बच्चे की नाभि (नाल) से मवाद आना, या वह लाल या सूजी होना?",
+      "short_en": "pus or redness at the cord", "short_hi": "नाभि से मवाद या लालिमा"
+    }
+  ]
+}

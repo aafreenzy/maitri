@@ -1,0 +1,263 @@
+{
+  "version": "0.1-draft",
+  "status": "DRAFT. Not clinician reviewed. Do not describe as validated or official.",
+  "tiers": { "GREEN": 1, "AMBER": 2, "RED": 3 },
+  "tier_display": {
+    "RED": "Go to the hospital now",
+    "AMBER": "See the ANM, ASHA or doctor today",
+    "GREEN": "No danger sign told"
+  },
+  "design_note": "RED/AMBER/GREEN is the team's own design. The MoHFW MCP card has one tier ('take to hospital immediately'). Disclose this in the app (About page) and in the pitch.",
+  "semantics": {
+    "answers": ["yes", "no", "not_sure"],
+    "unanswered_or_skipped": "not_sure",
+    "not_sure_rule": "A not_sure answer on a question whose yes-tier is RED or AMBER counts as AMBER. It never counts as GREEN-by-default.",
+    "result_tier": "Maximum tier over all fired rules; GREEN if none fired.",
+    "stage_filter": "Only questions and rules whose stages include the chosen stage are evaluated. Answers to non-applicable questions are ignored.",
+    "rule_types": {
+      "single": "Fires from one question answer using tier_if.",
+      "all_of": "Fires with tier_if.yes only when every listed question is answered yes.",
+      "count": "Fires with tier_if.yes when at least `min` of the questions in `among` are answered yes (not_sure does not count)."
+    }
+  },
+  "sources": {
+    "S-MCP": {
+      "title": "MoHFW Mother and Child Protection (MCP) Card, English (NHM copy)",
+      "url": "https://nhm.gov.in/New_Updates_2018/NHM_Components/Immunization/Guildelines_for_immunization/MCP_Card_English_version.pdf",
+      "confidence": "official_text_via_fetch_summary_recheck_raw_pdf"
+    },
+    "S-HBNC": {
+      "title": "HBNC leaflet (Assam NHM copy of national leaflet)",
+      "url": "https://nhm.assam.gov.in/sites/default/files/swf_utility_folder/departments/nhm_lipl_in_oid_6/menu/document/hbnc_leaflet_revised_eng.pdf",
+      "confidence": "official_text_via_fetch_summary_recheck_raw_pdf"
+    },
+    "S-WHO-B": {
+      "title": "WHO Pregnancy, childbirth, postpartum and newborn care: a guide for essential practice, chapter B (quick check)",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK326676/",
+      "confidence": "official_text_via_fetch_summary_recheck_raw_pdf"
+    },
+    "S-WHO-D": {
+      "title": "WHO essential practice guide, chapter D (childbirth)",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK326674/",
+      "confidence": "official_text_via_fetch_summary_recheck_raw_pdf"
+    },
+    "S-WHO-MCPC": {
+      "title": "WHO Managing complications in pregnancy and childbirth, chapters C and E (summary supplied by the team, not independently read)",
+      "url": "https://www.who.int/publications/i/item/9789241565493",
+      "confidence": "user_supplied_summary_unverified"
+    },
+    "S-TEAM": {
+      "title": "Team design decision (no official source). Needs clinician review.",
+      "url": null,
+      "confidence": "team_design"
+    }
+  },
+  "rules": [
+    {
+      "id": "R-FITS-01", "type": "single", "module": "core",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "question_id": "q_fits",
+      "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-HBNC", "S-WHO-B"],
+      "confidence": "official_text_recheck",
+      "reviewed_by": null
+    },
+    {
+      "id": "R-BLD-01", "type": "single", "module": "core",
+      "stages": ["pregnant", "labour"],
+      "question_id": "q_bleed_preg",
+      "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP"],
+      "confidence": "official_text_recheck",
+      "reviewed_by": null
+    },
+    {
+      "id": "R-PPH-01", "type": "single", "module": "core",
+      "stages": ["after_birth"],
+      "question_id": "q_bleed_pp",
+      "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-WHO-B"],
+      "confidence": "official_text_recheck",
+      "reviewed_by": null,
+      "note": "WHO describes heavy postpartum bleeding as a pad or cloth soaked in under 5 minutes, or constant trickling. The app wording stays lay-friendly and encodes no pad count."
+    },
+    {
+      "id": "R-HTN-01", "type": "single", "module": "core",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "question_id": "q_headache_vision",
+      "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-WHO-B"],
+      "confidence": "official_text_recheck",
+      "reviewed_by": null,
+      "note": "No blood pressure thresholds are encoded. BP is a health-worker measurement."
+    },
+    {
+      "id": "R-SWL-01", "type": "single", "module": "core",
+      "stages": ["pregnant", "labour"],
+      "question_id": "q_swelling",
+      "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP"],
+      "confidence": "official_text_recheck",
+      "reviewed_by": null,
+      "note": "The MCP card lists swelling inside a group with headache, blurred vision and fits. The question excludes swelling of the feet only. A reviewer may downgrade to AMBER to limit over-escalation."
+    },
+    {
+      "id": "R-FEV-01", "type": "single", "module": "core",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "question_id": "q_fever",
+      "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-HBNC", "S-WHO-B"],
+      "confidence": "official_text_recheck",
+      "reviewed_by": null,
+      "note": "The MCP card gives no numeric temperature. The HBNC leaflet gives above 102 F for mothers. The app asks a lay question and encodes no number."
+    },
+    {
+      "id": "R-DIS-01", "type": "single", "module": "core",
+      "stages": ["after_birth"],
+      "question_id": "q_discharge",
+      "tier_if": { "yes": "AMBER", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-HBNC", "S-TEAM"],
+      "confidence": "team_design_tier",
+      "reviewed_by": null,
+      "note": "HBNC gives foul discharge with temperature above 100 F as a danger sign. Foul discharge alone is AMBER by team decision."
+    },
+    {
+      "id": "R-INF-02", "type": "all_of", "module": "core",
+      "stages": ["after_birth"],
+      "question_ids": ["q_discharge", "q_fever"],
+      "tier_if": { "yes": "RED" },
+      "source_refs": ["S-HBNC", "S-WHO-D"],
+      "confidence": "official_text_recheck",
+      "reviewed_by": null
+    },
+    {
+      "id": "R-PROM-01", "type": "single", "module": "core",
+      "stages": ["pregnant", "labour"],
+      "question_id": "q_water_leak",
+      "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-WHO-D"],
+      "confidence": "official_text_recheck",
+      "reviewed_by": null
+    },
+    {
+      "id": "R-ANA-01", "type": "single", "module": "core",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "question_id": "q_pale_breathless",
+      "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-WHO-B"],
+      "confidence": "official_text_recheck",
+      "reviewed_by": null,
+      "note": "No haemoglobin number is encoded. Severe anaemia is a lab or clinician finding."
+    },
+    {
+      "id": "R-BRE-01", "type": "single", "module": "core",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "question_id": "q_hard_breath",
+      "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-WHO-MCPC", "S-TEAM"],
+      "confidence": "team_decision_plus_user_supplied_summary",
+      "reviewed_by": null,
+      "note": "No maternal breathing criteria were found in the primary text read. RED is a team decision because under-triage is the costlier error. Downgrade only if the clinician reviewer disagrees."
+    },
+    {
+      "id": "R-ABD-01", "type": "single", "module": "core",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "question_id": "q_belly_pain",
+      "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-WHO-B", "S-WHO-MCPC", "S-TEAM"],
+      "confidence": "team_decision_plus_user_supplied_summary",
+      "reviewed_by": null,
+      "note": "Earlier draft had AMBER. The team-supplied WHO summary calls severe abdominal pain a high-priority emergency sign, so the draft is now RED for 'very bad' pain. Reviewer may downgrade."
+    },
+    {
+      "id": "R-FM-01", "type": "single", "module": "core",
+      "stages": ["pregnant", "labour"],
+      "question_id": "q_baby_moves",
+      "tier_if": { "yes": "AMBER", "not_sure": "AMBER" },
+      "source_refs": ["S-WHO-MCPC", "S-TEAM"],
+      "confidence": "user_supplied_summary_unverified",
+      "reviewed_by": null,
+      "note": "No movement count is encoded. No kick chart. The team-supplied WHO summary says routine daily kick charts are recommended only within research frameworks."
+    },
+    {
+      "id": "R-DVT-01", "type": "single", "module": "core",
+      "stages": ["after_birth"],
+      "question_id": "q_leg_pain",
+      "tier_if": { "yes": "AMBER", "not_sure": "AMBER" },
+      "source_refs": ["S-WHO-MCPC", "S-TEAM"],
+      "confidence": "user_supplied_summary_unverified",
+      "reviewed_by": null
+    },
+    {
+      "id": "R-CNF-01", "type": "single", "module": "core",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "question_id": "q_confused",
+      "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-HBNC"],
+      "confidence": "official_text_recheck",
+      "reviewed_by": null
+    },
+    {
+      "id": "R-LAB-01", "type": "single", "module": "core",
+      "stages": ["labour"],
+      "question_id": "q_long_labour",
+      "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-WHO-D"],
+      "confidence": "official_text_recheck",
+      "reviewed_by": null
+    },
+    {
+      "id": "R-MH-01", "type": "single", "module": "core",
+      "stages": ["after_birth"],
+      "question_id": "q_wellbeing",
+      "tier_if": { "yes": "AMBER", "not_sure": "AMBER" },
+      "flags": ["wellbeing_support"],
+      "source_refs": ["S-WHO-MCPC", "S-TEAM"],
+      "confidence": "user_supplied_summary_unverified",
+      "reviewed_by": null,
+      "note": "Not a triage verdict. Show the support card (Tele-MANAS 14416, and 112 if anyone is in immediate danger). Clinician must review the wording before real use."
+    },
+    {
+      "id": "R-MULTI-01", "type": "count", "module": "core",
+      "stages": ["pregnant", "labour", "after_birth"],
+      "among": ["q_discharge", "q_baby_moves", "q_leg_pain"],
+      "min": 2,
+      "tier_if": { "yes": "RED" },
+      "source_refs": ["S-TEAM"],
+      "confidence": "team_design",
+      "reviewed_by": null,
+      "note": "Two or more AMBER-class signs together escalate to RED. Over-escalation is accepted by design. q_wellbeing is deliberately excluded."
+    },
+    {
+      "id": "R-NB-01", "type": "single", "module": "newborn", "stages": ["after_birth"],
+      "question_id": "n_feed", "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-HBNC"], "confidence": "official_text_recheck", "reviewed_by": null
+    },
+    {
+      "id": "R-NB-02", "type": "single", "module": "newborn", "stages": ["after_birth"],
+      "question_id": "n_breath", "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-HBNC"], "confidence": "official_text_recheck", "reviewed_by": null,
+      "note": "HBNC gives breathing above 60 per minute or chest in-drawing. The app asks a lay question and encodes no count."
+    },
+    {
+      "id": "R-NB-03", "type": "single", "module": "newborn", "stages": ["after_birth"],
+      "question_id": "n_temp", "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-HBNC"], "confidence": "official_text_recheck", "reviewed_by": null
+    },
+    {
+      "id": "R-NB-04", "type": "single", "module": "newborn", "stages": ["after_birth"],
+      "question_id": "n_fit", "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-HBNC"], "confidence": "official_text_recheck", "reviewed_by": null
+    },
+    {
+      "id": "R-NB-05", "type": "single", "module": "newborn", "stages": ["after_birth"],
+      "question_id": "n_yellow", "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-MCP", "S-HBNC"], "confidence": "official_text_recheck", "reviewed_by": null
+    },
+    {
+      "id": "R-NB-06", "type": "single", "module": "newborn", "stages": ["after_birth"],
+      "question_id": "n_cord", "tier_if": { "yes": "RED", "not_sure": "AMBER" },
+      "source_refs": ["S-HBNC"], "confidence": "official_text_recheck", "reviewed_by": null
+    }
+  ]
+}

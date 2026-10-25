@@ -1,0 +1,8 @@
+@page { size: A5; margin: 10mm; }
+@media print {
+  html { font-size: 12pt; }
+  body { background: #fff; }
+  .no-print, .header, .action-bar { display: none !important; }
+  .page { max-width: none; padding: 0; min-height: 0; }
+  .slip { border: none; padding: 0; }
+}
